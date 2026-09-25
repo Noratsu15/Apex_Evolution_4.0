@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hato El Roble — Cría de ganado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --earth:#2E2418; --field:#F1EBDD; --panel:#FBF8F0; --brass:#8A6A2F; --pine:#3F4A32; --line:#DCD2B8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--field);color:var(--earth);font-family:'Inter',sans-serif;line-height:1.6}
+  h1,h2,h3{font-family:'Source Serif 4',serif;font-weight:700;line-height:1.15}
+  a{color:inherit}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+  header{display:flex;justify-content:space-between;align-items:center;padding:24px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Source Serif 4',serif;font-weight:700;font-size:1.2rem}
+  .mark{width:34px;height:34px;border:2px solid var(--brass);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--brass)}
+  nav a{margin-left:26px;text-decoration:none;font-size:.92rem;color:var(--earth)}
+
+  .hero{padding:56px 24px 80px;border-bottom:1px solid var(--line)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+  .hero h1{font-size:2.9rem;max-width:12ch}
+  .hero p{margin-top:18px;max-width:44ch;color:#5A5040}
+  .stat-row{display:flex;gap:36px;margin-top:34px}
+  .stat b{display:block;font-family:'Source Serif 4',serif;font-size:1.8rem;color:var(--pine)}
+  .stat span{font-size:.82rem;color:#6B6047}
+  .cta{display:inline-block;margin-top:32px;background:var(--pine);color:var(--field);padding:14px 26px;text-decoration:none;font-weight:500;border-radius:2px}
+
+  .field-art{aspect-ratio:4/5;border-radius:4px;position:relative;overflow:hidden;
+    background:linear-gradient(180deg,#E7DEC2 0%,#E7DEC2 55%,#D9CE9F 55%,#D9CE9F 100%);}
+  .field-art::before{content:"";position:absolute;left:10%;right:10%;bottom:18%;height:26%;
+    background:var(--pine);opacity:.85;clip-path:polygon(0 60%,15% 30%,30% 55%,50% 20%,68% 50%,85% 25%,100% 55%,100% 100%,0 100%);}
+  .field-art::after{content:"";position:absolute;top:16%;left:20%;width:60px;height:34px;background:var(--brass);border-radius:40% 40% 45% 45%;opacity:.9;}
+
+  section{padding:64px 24px;border-bottom:1px solid var(--line)}
+  .label{color:var(--brass);font-size:.85rem;font-weight:600}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:36px;border:1px solid var(--line)}
+  .card{background:var(--panel);padding:28px}
+  .card h3{font-size:1.15rem;margin-bottom:8px}
+  .card p{color:#5A5040;font-size:.93rem}
+
+  table{width:100%;border-collapse:collapse;margin-top:32px;font-size:.94rem}
+  th,td{text-align:left;padding:14px 10px;border-bottom:1px solid var(--line)}
+  th{font-weight:600;color:var(--brass);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+
+  footer{padding:36px 24px;text-align:center;color:#8A8064;font-size:.85rem}
+  footer strong{color:var(--earth)}
+
+  @media(max-width:760px){
+    .hero-grid{grid-template-columns:1fr}
+    .grid3{grid-template-columns:1fr}
+    .hero h1{font-size:2.2rem}
+    .stat-row{flex-wrap:wrap;gap:20px}
+    table{display:block;overflow-x:auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><span class="mark">ER</span> Hato El Roble</div>
+  <nav>
+    <a href="#genetica">Genética</a>
+    <a href="#inventario">Inventario</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="label">Cría de ganado de doble propósito</p>
+      <h1>Tres generaciones cuidando la misma tierra.</h1>
+      <p>Hato familiar dedicado a la cría de ganado Brahman y Gyr lechero, con manejo sanitario documentado y trazabilidad completa de cada animal.</p>
+      <div class="stat-row">
+        <div class="stat"><b>420</b><span>Cabezas de ganado</span></div>
+        <div class="stat"><b>38</b><span>Años de trayectoria</span></div>
+        <div class="stat"><b>100%</b><span>Trazabilidad sanitaria</span></div>
+      </div>
+      <a class="cta" href="#contacto">Solicitar catálogo de reproductores</a>
+    </div>
+    <div class="field-art"></div>
+  </div>
+</div>
+
+<section id="genetica" class="wrap">
+  <p class="label">Nuestro manejo</p>
+  <h2>Genética, sanidad y pasto — en ese orden</h2>
+  <div class="grid3">
+    <div class="card">
+      <h3>Genética registrada</h3>
+      <p>Líneas Brahman y Gyr con registro genealógico y evaluación de progenie.</p>
+    </div>
+    <div class="card">
+      <h3>Sanidad documentada</h3>
+      <p>Calendario de vacunación, desparasitación y control veterinario por animal.</p>
+    </div>
+    <div class="card">
+      <h3>Pastoreo rotacional</h3>
+      <p>Potreros divididos por franjas para mejor aprovechamiento y recuperación del suelo.</p>
+    </div>
+  </div>
+</section>
+
+<section id="inventario" class="wrap">
+  <p class="label">Disponibilidad actual</p>
+  <h2>Reproductores y novillas de vientre</h2>
+  <table>
+    <tr><th>Categoría</th><th>Raza</th><th>Edad</th><th>Disponibilidad</th></tr>
+    <tr><td>Toro reproductor</td><td>Brahman rojo</td><td>3 años</td><td>2 disponibles</td></tr>
+    <tr><td>Novilla de vientre</td><td>Gyr lechero</td><td>18–24 meses</td><td>12 disponibles</td></tr>
+    <tr><td>Ternero destetado</td><td>Brahman × Gyr</td><td>8 meses</td><td>Consultar</td></tr>
+  </table>
+</section>
+
+<section id="contacto" class="wrap" style="text-align:center;border-bottom:none">
+  <p class="label">Visítanos en finca</p>
+  <h2>Recibimos visitas con cita previa</h2>
+  <p style="margin-top:14px;color:#5A5040">Vía a Los Llanos, km 14 · hatoelroble@correo.com · +00 000 000 0000</p>
+  <a class="cta" style="margin-top:24px" href="#">Escribir por WhatsApp</a>
+</section>
+
+<footer>
+  Sitio de demostración para el sector ganadero · Desarrollado por <strong>Apex Evolution 4.0</strong>
+</footer>
+
+</body>
+</html>

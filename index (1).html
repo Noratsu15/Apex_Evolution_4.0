@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruta Azul — Tours y expediciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:#0B2430; --mid:#12586B; --foam:#EAF6F4; --coral:#F2825C; --line:rgba(255,255,255,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--deep);color:var(--foam);font-family:'Space Grotesk',sans-serif;line-height:1.55}
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  header{display:flex;justify-content:space-between;align-items:center;padding:26px 24px}
+  .logo{font-weight:700;font-size:1.25rem;letter-spacing:.5px}
+  nav a{margin-left:26px;text-decoration:none;font-size:.9rem;color:var(--foam);opacity:.85}
+  .btn{background:var(--coral);color:#1a1208;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:500;font-size:.9rem}
+
+  .hero{position:relative;padding:70px 24px 120px;overflow:hidden}
+  .horizon{position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(600px 300px at 80% 10%, rgba(242,130,92,.25), transparent 60%),
+      linear-gradient(180deg, transparent 55%, rgba(255,255,255,.06) 56%, transparent 57%),
+      linear-gradient(180deg, var(--deep), var(--mid) 140%);
+  }
+  .hero-inner{position:relative;z-index:1;max-width:640px}
+  .hero h1{font-size:3.2rem;font-weight:700;line-height:1.06;margin-bottom:20px}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:46ch}
+  .cta-row{margin-top:32px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .cta-row a.line{text-decoration:underline;text-underline-offset:4px;font-size:.95rem}
+
+  .waves{display:flex;gap:6px;margin-top:60px;position:relative;z-index:1}
+  .wave{flex:1;height:3px;background:rgba(255,255,255,.18);border-radius:2px}
+  .wave.on{background:var(--coral)}
+
+  section{padding:70px 24px}
+  .label{color:var(--coral);font-size:.85rem;font-weight:500}
+  h2{font-size:1.9rem;margin-top:8px;max-width:20ch}
+
+  .routes{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .route{background:var(--deep);padding:28px}
+  .route .tag{font-size:.8rem;opacity:.7}
+  .route h3{margin:10px 0 8px;font-size:1.15rem}
+  .route p{opacity:.8;font-size:.92rem}
+  .route .price{margin-top:16px;color:var(--coral);font-weight:700}
+
+  .band{background:var(--mid);border-radius:6px;padding:44px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .band h2{max-width:26ch;margin-top:0}
+
+  footer{padding:36px 24px;text-align:center;border-top:1px solid var(--line);opacity:.65;font-size:.85rem}
+  footer strong{opacity:1;color:var(--foam)}
+
+  @media(max-width:760px){
+    .routes{grid-template-columns:1fr}
+    .hero h1{font-size:2.3rem}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Ruta Azul</div>
+  <nav>
+    <a href="#rutas">Rutas</a>
+    <a href="#reservar">Reservar</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="horizon"></div>
+  <div class="wrap hero-inner">
+    <p class="label">Turismo de naturaleza y aventura</p>
+    <h1>Conoce la costa como la conocen los que viven de ella.</h1>
+    <p>Guías locales, grupos pequeños y rutas que no aparecen en las guías. Kayak al amanecer, senderismo entre acantilados y cocina de mar.</p>
+    <div class="cta-row">
+      <a class="btn" href="#rutas">Ver rutas disponibles</a>
+      <a class="line" href="#reservar">Hablar con un guía →</a>
+    </div>
+    <div class="waves">
+      <div class="wave on"></div><div class="wave on"></div><div class="wave"></div>
+      <div class="wave"></div><div class="wave"></div><div class="wave"></div>
+    </div>
+  </div>
+</div>
+
+<section id="rutas" class="wrap">
+  <p class="label">Nuestras rutas</p>
+  <h2>Tres formas de recorrer la bahía</h2>
+  <div class="routes">
+    <div class="route">
+      <div class="tag">Medio día · 4 personas máx.</div>
+      <h3>Kayak al amanecer</h3>
+      <p>Salida antes del sol, café en la caleta y regreso a media mañana.</p>
+      <div class="price">Desde $35</div>
+    </div>
+    <div class="route">
+      <div class="tag">Día completo · 8 personas máx.</div>
+      <h3>Sendero del acantilado</h3>
+      <p>12km de caminata costera con vistas a las colonias de aves marinas.</p>
+      <div class="price">Desde $58</div>
+    </div>
+    <div class="route">
+      <div class="tag">Noche · 6 personas máx.</div>
+      <h3>Cena de pescadores</h3>
+      <p>Cena preparada por familias de pescadores locales, frente al mar.</p>
+      <div class="price">Desde $42</div>
+    </div>
+  </div>
+</section>
+
+<section id="reservar" class="wrap">
+  <div class="band">
+    <h2>¿Vienes en grupo o para un evento? Armamos la ruta contigo.</h2>
+    <a class="btn" href="#">Escribir por WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  Sitio de demostración para el sector turismo · Desarrollado por <strong>Apex Evolution 4.0</strong>
+</footer>
+
+</body>
+</html>
