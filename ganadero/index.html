@@ -3,130 +3,350 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hato El Roble — Cría de ganado</title>
+<title>ASOGAYA — Asociación Regional de Ganaderos del Estado Yaracuy</title>
+<meta name="description" content="ASOGAYA reúne a los ganaderos del estado Yaracuy desde 1961 para fortalecer la sanidad, la genética y la comercialización del hato regional.">
+<link rel="icon" href="../img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --earth:#2E2418; --field:#F1EBDD; --panel:#FBF8F0; --brass:#8A6A2F; --pine:#3F4A32; --line:#DCD2B8;
+    --earth:#2E2418; --earth-deep:#1F180F; --field:#F1EBDD; --field-2:#EAE2CF;
+    --panel:#FBF8F0; --brass:#8A6A2F; --brass-light:#C9AE72; --brass-soft:#EFE5CC;
+    --pine:#3F4A32; --pine-deep:#2C3524; --line:#DCD2B8; --muted:#5A5040;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--field);color:var(--earth);font-family:'Inter',sans-serif;line-height:1.6}
-  h1,h2,h3{font-family:'Source Serif 4',serif;font-weight:700;line-height:1.15}
+  html{scroll-behavior:smooth}
+  body{background:var(--field);color:var(--earth);font-family:'Inter',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:'Source Serif 4',serif;font-weight:700;line-height:1.12}
   a{color:inherit}
-  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
 
-  header{display:flex;justify-content:space-between;align-items:center;padding:24px}
-  .brand{display:flex;align-items:center;gap:10px;font-family:'Source Serif 4',serif;font-weight:700;font-size:1.2rem}
-  .mark{width:34px;height:34px;border:2px solid var(--brass);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--brass)}
-  nav a{margin-left:26px;text-decoration:none;font-size:.92rem;color:var(--earth)}
+  /* ===== NAV ===== */
+  header{position:sticky;top:0;z-index:50;background:rgba(241,235,221,.9);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s, box-shadow .3s}
+  header.scrolled{border-bottom-color:var(--line);box-shadow:0 8px 30px rgba(46,36,24,.1)}
+  .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:12px 28px;max-width:1240px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:13px;text-decoration:none}
+  .brand img{width:50px;height:50px;border-radius:50%;object-fit:cover;background:#fff;border:2px solid var(--brass);box-shadow:0 2px 10px rgba(138,106,47,.25)}
+  .brand-text b{display:block;font-family:'Source Serif 4',serif;font-size:1.3rem;letter-spacing:.03em;color:var(--earth)}
+  .brand-text span{display:block;font-size:.66rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+  nav{display:flex;gap:34px}
+  nav a{text-decoration:none;font-size:.92rem;font-weight:500;position:relative;padding:4px 0}
+  nav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--brass);transition:width .3s ease}
+  nav a:hover::after{width:100%}
+  .btn{background:var(--pine);color:var(--field);padding:13px 28px;text-decoration:none;font-weight:600;font-size:.9rem;border-radius:999px;display:inline-block;transition:transform .25s ease, box-shadow .25s ease, background .25s ease}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(63,74,50,.35);background:var(--pine-deep)}
 
-  .hero{padding:56px 24px 80px;border-bottom:1px solid var(--line)}
-  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
-  .hero h1{font-size:2.9rem;max-width:12ch}
-  .hero p{margin-top:18px;max-width:44ch;color:#5A5040}
-  .stat-row{display:flex;gap:36px;margin-top:34px}
-  .stat b{display:block;font-family:'Source Serif 4',serif;font-size:1.8rem;color:var(--pine)}
-  .stat span{font-size:.82rem;color:#6B6047}
-  .cta{display:inline-block;margin-top:32px;background:var(--pine);color:var(--field);padding:14px 26px;text-decoration:none;font-weight:500;border-radius:2px}
+  /* ===== HERO ===== */
+  .hero{background:linear-gradient(160deg,var(--pine) 0%,var(--pine-deep) 70%);color:var(--field);padding:96px 24px 0;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;right:-130px;top:-130px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(201,174,114,.22),transparent 68%)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative;z-index:1}
+  .eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--brass-light);font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
+  .eyebrow::before{content:"";width:44px;height:1.5px;background:var(--brass-light)}
+  .hero h1{font-size:clamp(2.9rem,6vw,4.6rem);max-width:14ch;margin-top:22px;font-weight:800}
+  .hero h1 em{font-style:italic;font-weight:600;color:var(--brass-light)}
+  .hero p{margin-top:22px;max-width:50ch;color:rgba(241,235,221,.85);font-size:1.12rem}
+  .hero .cta-row{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap}
+  .btn.gold{background:var(--brass);color:#FBF3DF}
+  .btn.gold:hover{background:#9B7B3C;box-shadow:0 12px 26px rgba(138,106,47,.4)}
+  .btn.outline{background:transparent;border:1.5px solid rgba(241,235,221,.5);color:var(--field)}
+  .btn.outline:hover{background:rgba(241,235,221,.1);box-shadow:none;border-color:var(--field)}
 
-  .field-art{aspect-ratio:4/5;border-radius:4px;position:relative;overflow:hidden;
-    background:linear-gradient(180deg,#E7DEC2 0%,#E7DEC2 55%,#D9CE9F 55%,#D9CE9F 100%);}
-  .field-art::before{content:"";position:absolute;left:10%;right:10%;bottom:18%;height:26%;
-    background:var(--pine);opacity:.85;clip-path:polygon(0 60%,15% 30%,30% 55%,50% 20%,68% 50%,85% 25%,100% 55%,100% 100%,0 100%);}
-  .field-art::after{content:"";position:absolute;top:16%;left:20%;width:60px;height:34px;background:var(--brass);border-radius:40% 40% 45% 45%;opacity:.9;}
+  /* Ilustración ganadera en CSS (ahora hace de fondo/poster de respaldo) */
+  .field-art{aspect-ratio:4/5;border-radius:18px;position:relative;overflow:hidden;box-shadow:0 30px 60px rgba(31,24,15,.4);
+    background:linear-gradient(180deg,#EBDFBE 0%,#E2D3A8 58%,#D3C48D 58%,#CBB87E 100%)}
 
-  section{padding:64px 24px;border-bottom:1px solid var(--line)}
-  .label{color:var(--brass);font-size:.85rem;font-weight:600}
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:36px;border:1px solid var(--line)}
-  .card{background:var(--panel);padding:28px}
-  .card h3{font-size:1.15rem;margin-bottom:8px}
-  .card p{color:#5A5040;font-size:.93rem}
+  /* El video se ancla al contenedor y lo cubre por completo */
+  .field-art .field-video{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    display:block;
+    object-fit:cover;          /* cubre sin deformar (recorta lo sobrante) */
+    object-position:center;
+    border-radius:inherit;
+    background:#1F180F;        /* evita el destello blanco al cargar */
+  }
 
-  table{width:100%;border-collapse:collapse;margin-top:32px;font-size:.94rem}
-  th,td{text-align:left;padding:14px 10px;border-bottom:1px solid var(--line)}
-  th{font-weight:600;color:var(--brass);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+  /* Velo suave para que el video no compita con el texto */
+  .field-art::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg,rgba(31,24,15,.04) 0%,rgba(31,24,15,.26) 100%);
+  }
 
-  footer{padding:36px 24px;text-align:center;color:#8A8064;font-size:.85rem}
-  footer strong{color:var(--earth)}
+  /* Respaldo si el video no carga: se ve la ilustración CSS original */
+  .field-art .field-video.is-error{display:none}
 
-  @media(max-width:760px){
+  /* Elementos decorativos de la ilustración (solo visibles si falla el video) */
+  .sun{position:absolute;top:14%;right:18%;width:58px;height:58px;border-radius:50%;background:var(--brass);opacity:.9}
+  .fence{position:absolute;left:0;right:0;bottom:0;height:16%;background:
+    repeating-linear-gradient(90deg,transparent 0 34px,rgba(46,36,24,.55) 34px 38px,transparent 38px 72px),
+    linear-gradient(180deg,transparent 42%,rgba(46,36,24,.5) 42% 52%,transparent 52%)}
+
+  .hero-strip{position:relative;z-index:1;max-width:1120px;margin:70px auto 0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(241,235,221,.16);padding:26px 28px 32px;gap:20px}
+  .hero-strip div b{font-family:'Source Serif 4',serif;font-size:1.9rem;color:var(--brass-light);display:block;line-height:1.1}
+  .hero-strip div span{font-size:.85rem;color:rgba(241,235,221,.72)}
+
+  /* ===== SECTIONS ===== */
+  section{padding:96px 24px;border-bottom:1px solid var(--line)}
+  .label{display:inline-flex;align-items:center;gap:12px;color:var(--brass);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em}
+  .label::before{content:"";width:36px;height:1.5px;background:var(--brass)}
+  h2{font-size:clamp(2.1rem,4vw,3rem);margin-top:16px;max-width:24ch}
+  h2 em{font-style:italic;font-weight:600;color:var(--pine)}
+  .lead{color:var(--muted);margin-top:18px;max-width:60ch;font-size:1.06rem}
+
+  /* ===== SERVICIOS ===== */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:52px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:34px 30px;position:relative;overflow:hidden;transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease}
+  .card::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--brass),var(--brass-light));opacity:0;transition:opacity .3s}
+  .card:hover{transform:translateY(-8px);box-shadow:0 22px 44px rgba(46,36,24,.14);border-color:var(--brass-light)}
+  .card:hover::before{opacity:1}
+  .card .ic{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--brass-soft),#F7EFDA);display:flex;align-items:center;justify-content:center;font-family:'Source Serif 4',serif;color:var(--brass);font-weight:700;font-size:1.2rem;box-shadow:inset 0 0 0 1px rgba(138,106,47,.25)}
+  .card h3{font-size:1.32rem;margin:18px 0 10px}
+  .card p{color:var(--muted);font-size:.95rem}
+
+  /* ===== TABLA ===== */
+  #inventario{background:linear-gradient(180deg,var(--field) 0%,var(--field-2) 100%)}
+  .table-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:44px;box-shadow:0 18px 40px rgba(46,36,24,.08)}
+  table{width:100%;border-collapse:collapse;font-size:.95rem}
+  th{background:var(--earth);color:var(--brass-light);text-align:left;padding:16px 20px;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+  td{padding:18px 20px;border-bottom:1px solid var(--line);color:var(--muted)}
+  tr:last-child td{border-bottom:none}
+  tbody tr{transition:background .2s}
+  tbody tr:hover{background:#F5EFDF}
+  td:first-child{font-weight:600;color:var(--earth)}
+  .pill{display:inline-block;background:var(--brass-soft);color:var(--brass);font-weight:600;font-size:.8rem;padding:5px 14px;border-radius:999px}
+
+  /* ===== APEX / EQUIPO ===== */
+  .gift-banner{background:linear-gradient(120deg,#241C08 0%,#3A2E10 60%,#4A3A14 100%);border:1px solid var(--brass);border-radius:18px;padding:40px 44px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-top:40px;box-shadow:0 24px 50px rgba(36,28,8,.28)}
+  .gift-banner img{width:72px;height:72px;border-radius:50%;background:#fff;object-fit:cover;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+  .gift-banner p{color:rgba(241,235,221,.8);font-size:1rem;max-width:62ch}
+  .gift-banner strong{color:var(--brass-light);font-size:1.05rem}
+
+  .team{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:56px}
+  .member{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:38px 28px 34px;text-align:center;transition:transform .3s ease, box-shadow .3s ease}
+  .member:hover{transform:translateY(-8px);box-shadow:0 22px 44px rgba(46,36,24,.13)}
+  .member .photo{width:158px;height:158px;border-radius:50%;overflow:hidden;margin:0 auto 22px;border:4px solid var(--brass-light);box-shadow:0 10px 24px rgba(46,36,24,.18)}
+  .member .photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .member:hover .photo img{transform:scale(1.06)}
+  .member h3{font-size:1.3rem}
+  .member .role{color:var(--brass);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;margin:6px 0 16px;font-weight:700}
+  .member p{color:var(--muted);font-size:.93rem;font-style:italic}
+
+  /* ===== CTA FINAL ===== */
+  .cta-final{background:radial-gradient(1200px 500px at 50% -10%,var(--pine) 0%,var(--earth-deep) 60%);color:var(--field);text-align:center;border-bottom:none}
+  .cta-final .label{justify-content:center;color:var(--brass-light)}
+  .cta-final .label::before{background:var(--brass-light)}
+  .cta-final h2{margin:16px auto 0;color:var(--field);max-width:22ch;font-size:clamp(2.2rem,4.5vw,3.4rem)}
+  .cta-final h2 em{font-style:italic;font-weight:600;color:var(--brass-light)}
+  .cta-final p{color:rgba(241,235,221,.78);margin:20px auto 0;font-size:1.1rem;max-width:52ch}
+  .contact-line{margin-top:28px;display:flex;justify-content:center;gap:34px;flex-wrap:wrap;color:rgba(241,235,221,.85);font-size:.95rem}
+  .contact-line span{display:inline-flex;align-items:center;gap:8px}
+  .cta-row{justify-content:center;margin-top:36px;display:flex;gap:16px;flex-wrap:wrap}
+
+  footer{padding:38px 24px;text-align:center;color:#B7AC8E;font-size:.88rem;background:var(--earth-deep)}
+  footer strong{color:var(--brass-light)}
+  footer .foot-logo{width:56px;height:56px;border-radius:50%;object-fit:cover;background:#fff;border:2px solid var(--brass);margin:0 auto 16px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  footer .foot-line{margin-top:8px}
+
+  /* ===== REVEAL ===== */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.visible{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+
+  @media(max-width:880px){
     .hero-grid{grid-template-columns:1fr}
-    .grid3{grid-template-columns:1fr}
-    .hero h1{font-size:2.2rem}
-    .stat-row{flex-wrap:wrap;gap:20px}
-    table{display:block;overflow-x:auto}
+    .field-art{max-width:420px;margin:0 auto}
+    .hero-strip{grid-template-columns:1fr;gap:24px}
+    .grid3,.team{grid-template-columns:1fr}
+    nav{display:none}
+    .hero{padding-top:72px}
+    section{padding:72px 24px}
+    .gift-banner{padding:32px 26px}
   }
 </style>
+<base target="_blank">
 </head>
 <body>
 
-<header>
-  <div class="brand"><span class="mark">ER</span> Hato El Roble</div>
-  <nav>
-    <a href="#genetica">Genética</a>
-    <a href="#inventario">Inventario</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
+<header id="site-header">
+  <div class="nav-inner">
+    <a class="brand" href="#inicio">
+      <img src="../img/logo-asogaya.jpeg" alt="ASOGAYA">
+      <span class="brand-text"><b>ASOGAYA</b><span>Ganaderos del Estado Yaracuy · Desde 1961</span></span>
+    </a>
+    <nav>
+      <a href="#labor">Nuestra labor</a>
+      <a href="#inventario">Inventario</a>
+      <a href="#apoyo">Apex Evolution 4.0</a>
+    </nav>
+    <a class="btn gold" href="#contacto">Hazte socio</a>
+  </div>
 </header>
 
-<div class="hero">
+<div class="hero" id="inicio">
   <div class="wrap hero-grid">
     <div>
-      <p class="label">Cría de ganado de doble propósito</p>
-      <h1>Tres generaciones cuidando la misma tierra.</h1>
-      <p>Hato familiar dedicado a la cría de ganado Brahman y Gyr lechero, con manejo sanitario documentado y trazabilidad completa de cada animal.</p>
-      <div class="stat-row">
-        <div class="stat"><b>420</b><span>Cabezas de ganado</span></div>
-        <div class="stat"><b>38</b><span>Años de trayectoria</span></div>
-        <div class="stat"><b>100%</b><span>Trazabilidad sanitaria</span></div>
+      <p class="eyebrow">Estado Yaracuy · Venezuela · Desde 1961</p>
+      <h1>La fuerza que <em>une</em> a los ganaderos de Yaracuy.</h1>
+      <p>La Asociación Regional de Ganaderos del Estado Yaracuy agrupa a productores de doble propósito para fortalecer la sanidad, mejorar la genética del hato regional y abrir nuevos mercados.</p>
+      <div class="cta-row">
+        <a class="btn gold" href="#labor">Conoce nuestra labor</a>
+        <a class="btn outline" href="#inventario">Inventario →</a>
       </div>
-      <a class="cta" href="#contacto">Solicitar catálogo de reproductores</a>
     </div>
-    <div class="field-art"></div>
+    <div class="field-art">
+      <video class="field-video"
+             src="../img/video-asogaya.mp4"
+             poster="../img/logo-asogaya.jpeg"
+             autoplay muted loop playsinline preload="auto"
+             aria-label="Ganado de ASOGAYA en potreros de Yaracuy"></video>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div><b>300+</b><span>productores asociados en el estado</span></div>
+    <div><b>65</b><span>años representando al gremio</span></div>
+    <div><b>100%</b><span>trazabilidad sanitaria del hato</span></div>
   </div>
 </div>
 
-<section id="genetica" class="wrap">
-  <p class="label">Nuestro manejo</p>
-  <h2>Genética, sanidad y pasto — en ese orden</h2>
+<section id="labor" class="wrap">
+  <p class="label reveal">Nuestra labor gremial</p>
+  <h2 class="reveal d1">Sanidad, genética y mercado — <em>en ese orden</em></h2>
+  <p class="lead reveal d2">Acompañamos al productor yaracuyano en cada etapa: desde el calendario sanitario de su hato hasta la comercialización de sus reproductores.</p>
   <div class="grid3">
-    <div class="card">
+    <div class="card reveal">
+      <div class="ic">G</div>
       <h3>Genética registrada</h3>
-      <p>Líneas Brahman y Gyr con registro genealógico y evaluación de progenie.</p>
+      <p>Líneas Brahman y Gyr con registro genealógico, evaluación de progenie y juzgamientos en ferias regionales.</p>
     </div>
-    <div class="card">
+    <div class="card reveal d1">
+      <div class="ic">S</div>
       <h3>Sanidad documentada</h3>
-      <p>Calendario de vacunación, desparasitación y control veterinario por animal.</p>
+      <p>Calendario de vacunación, desparasitación y control veterinario, con trazabilidad individual por animal.</p>
     </div>
-    <div class="card">
+    <div class="card reveal d2">
+      <div class="ic">P</div>
       <h3>Pastoreo rotacional</h3>
-      <p>Potreros divididos por franjas para mejor aprovechamiento y recuperación del suelo.</p>
+      <p>Asistencia técnica en potreros por franjas para mejorar el aprovechamiento y la recuperación del suelo.</p>
+    </div>
+    <div class="card reveal">
+      <div class="ic">C</div>
+      <h3>Comercialización</h3>
+      <p>Conexión con compradores nacionales, subastas y ferias ganaderas para vender al mejor precio.</p>
+    </div>
+    <div class="card reveal d1">
+      <div class="ic">F</div>
+      <h3>Capacitación</h3>
+      <p>Jornadas técnicas en nutrición, reproducción y gestión, dictadas junto a especialistas del sector.</p>
+    </div>
+    <div class="card reveal d2">
+      <div class="ic">R</div>
+      <h3>Representación gremial</h3>
+      <p>Voz institucional del ganadero yaracuyano ante los entes públicos y privados del país.</p>
     </div>
   </div>
 </section>
 
 <section id="inventario" class="wrap">
-  <p class="label">Disponibilidad actual</p>
-  <h2>Reproductores y novillas de vientre</h2>
-  <table>
-    <tr><th>Categoría</th><th>Raza</th><th>Edad</th><th>Disponibilidad</th></tr>
-    <tr><td>Toro reproductor</td><td>Brahman rojo</td><td>3 años</td><td>2 disponibles</td></tr>
-    <tr><td>Novilla de vientre</td><td>Gyr lechero</td><td>18–24 meses</td><td>12 disponibles</td></tr>
-    <tr><td>Ternero destetado</td><td>Brahman × Gyr</td><td>8 meses</td><td>Consultar</td></tr>
-  </table>
+  <p class="label reveal">Disponibilidad actual</p>
+  <h2 class="reveal d1">Reproductores y novillas <em>de vientre</em></h2>
+  <p class="lead reveal d2">Ofertas verificadas por la asociación. Cada animal cuenta con documentación sanitaria y registro genealógico.</p>
+  <div class="table-card reveal d2">
+    <table>
+      <thead>
+        <tr><th>Categoría</th><th>Raza</th><th>Edad</th><th>Disponibilidad</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Toro reproductor</td><td>Brahman rojo</td><td>3 años</td><td><span class="pill">2 disponibles</span></td></tr>
+        <tr><td>Novilla de vientre</td><td>Gyr lechero</td><td>18–24 meses</td><td><span class="pill">12 disponibles</span></td></tr>
+        <tr><td>Ternero destetado</td><td>Brahman × Gyr</td><td>8 meses</td><td><span class="pill">Consultar</span></td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
-<section id="contacto" class="wrap" style="text-align:center;border-bottom:none">
-  <p class="label">Visítanos en finca</p>
-  <h2>Recibimos visitas con cita previa</h2>
-  <p style="margin-top:14px;color:#5A5040">Vía a Los Llanos, km 14 · hatoelroble@correo.com · +00 000 000 0000</p>
-  <a class="cta" style="margin-top:24px" href="#">Escribir por WhatsApp</a>
+<section id="apoyo" class="wrap">
+  <p class="label reveal">Con el apoyo de</p>
+  <h2 class="reveal d1"><em>Apex Evolution 4.0</em></h2>
+  <p class="lead reveal d2">Apex Evolution 4.0 desarrollo esta plataforma digital a ASOGAYA como parte de su compromiso con la transformación tecnológica del sector ganadero en Yaracuy.</p>
+
+  <div class="gift-banner reveal">
+    <img src="../img/logo.png" alt="Apex Evolution 4.0">
+    <p><strong>Apex Evolution 4.0</strong> desarrolla páginas web, automatización y herramientas de inteligencia artificial para negocios del agro — hatos, fincas y asociaciones — que quieren atender a sus clientes mejor y más rápido.</p>
+  </div>
+
+  <div class="team">
+    <div class="member reveal">
+      <div class="photo"><img src="../img/luz-segura.jpg" alt="Luz Segura"></div>
+      <h3>Luz M. Segura B.</h3>
+      <p class="role">Fundadora · Abogada</p>
+      <p>"Reinventarse es adoptar la tecnología que le quita el peso operativo a tu negocio."</p>
+    </div>
+    <div class="member reveal d1">
+      <div class="photo"><img src="../img/luisana-gutierrez.jpg" alt="Luisana Gutiérrez"></div>
+      <h3>Luisana Gutiérrez</h3>
+      <p class="role">Mentora · Lcda. en Administración</p>
+      <p>"De sobrevivir a vivir: una nueva manera de explotar nuestro potencial al máximo."</p>
+    </div>
+    <div class="member reveal d2">
+      <div class="photo"><img src="../img/yuli-canas.jpg" alt="Yuli Cañas"></div>
+      <h3>Yuli Cañas</h3>
+      <p class="role">Mentora · Periodista</p>
+      <p>"Haz que la tecnología trabaje a favor de tu éxito."</p>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="cta-final">
+  <div class="wrap">
+    <p class="label reveal">Únete al gremio</p>
+    <h2 class="reveal d1">¿Eres ganadero en <em>Yaracuy</em>?</h2>
+    <p class="reveal d2">Afíliate a ASOGAYA y forma parte de una red que desde 1961 trabaja por el futuro del hato venezolano.</p>
+    <div class="contact-line reveal d2">
+      <span>◈ San Felipe, Yaracuy</span>
+      <span>◈ asogaya@correo.com</span>
+      <span>◈ +58 000 000 0000</span>
+    </div>
+    <div class="cta-row reveal d2">
+      <a class="btn gold" href="#">Escribir por WhatsApp</a>
+    </div>
+  </div>
 </section>
 
 <footer>
-  Sitio de demostración para el sector ganadero · Desarrollado por <strong>Apex Evolution 4.0</strong>
+  <div class="wrap">
+    <img class="foot-logo" src="../img/logo-asogaya.jpeg" alt="ASOGAYA">
+    <div class="foot-line">ASOGAYA — Asociación Regional de Ganaderos del Estado Yaracuy · RIF J-08519408-8 · Desde 1961</div>
+    <div class="foot-line">Sitio desarrollado por <strong>Apex Evolution 4.0</strong></div>
+  </div>
 </footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  }, {passive:true});
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, {threshold: .12});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* --- Reproducción del video del hero --- */
+  const heroVideo = document.querySelector('.field-video');
+  if (heroVideo) {
+    const safePlay = () => {
+      const p = heroVideo.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {}); // silencia el bloqueo del navegador
+    };
+
+    safePlay();
+    window.addEventListener('load', safePlay);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) safePlay(); });
+    heroVideo.addEventListener('error', () => heroVideo.classList.add('is-error'));
+  }
+</script>
 
 </body>
 </html>
