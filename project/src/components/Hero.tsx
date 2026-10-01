@@ -1,0 +1,86 @@
+import { ArrowRight, Play, Check } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { useLanguage } from '@/context/LanguageContext';
+
+interface HeroProps {
+  onGetStarted: () => void;
+}
+
+export default function Hero({ onGetStarted }: HeroProps) {
+  const { user } = useAuth();
+  const { t } = useLanguage();
+
+  const trustItems = [t.hero.trust1, t.hero.trust2, t.hero.trust3];
+
+  return (
+    <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 bg-slate-950">
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sky-500/20 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-cyan-400/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[150px]" />
+      </div>
+
+      {/* Grid overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+        <div className="text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/20 mb-8 animate-[fadeInUp_0.6s_ease-out]">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-sm font-medium text-sky-300">{t.hero.badge}</span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6 animate-[fadeInUp_0.7s_ease-out]">
+            {t.hero.headline1}
+            <br />
+            <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-[shimmer_3s_linear_infinite]">
+              {t.hero.headline2}
+            </span>
+          </h1>
+
+          {/* Subtext */}
+          <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-[fadeInUp_0.8s_ease-out]">
+            {t.hero.subtext}
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14 animate-[fadeInUp_0.9s_ease-out]">
+            <button
+              onClick={onGetStarted}
+              className="group inline-flex items-center gap-2 text-base font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 px-8 py-4 rounded-xl transition-all shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.03]"
+            >
+              {user ? t.hero.ctaPrimaryUser : t.hero.ctaPrimary}
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <button
+              onClick={() => document.querySelector('#how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group inline-flex items-center gap-2 text-base font-medium text-white border border-slate-700 hover:border-slate-500 px-8 py-4 rounded-xl transition-all hover:bg-slate-900/50"
+            >
+              <Play className="w-4 h-4 fill-current" />
+              {t.hero.ctaSecondary}
+            </button>
+          </div>
+
+          {/* Trust badges */}
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 animate-[fadeInUp_1s_ease-out]">
+            {trustItems.map((item) => (
+              <div key={item} className="flex items-center gap-2 text-sm text-slate-500">
+                <Check className="w-4 h-4 text-cyan-400" />
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
