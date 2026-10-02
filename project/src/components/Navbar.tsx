@@ -50,10 +50,12 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/30">
-              <Sparkles className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold text-white tracking-tight">Nexus</span>
+            <img 
+                src="../img/logo.png" 
+                alt="Logo" 
+                className="w-9 h-9 object-contain rounded-full" 
+              />
+            <span className="text-xl font-bold text-white tracking-tight">Apex Evolution 4.0</span>
           </div>
 
           {/* Desktop nav */}
