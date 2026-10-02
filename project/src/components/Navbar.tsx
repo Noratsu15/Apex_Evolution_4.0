@@ -51,7 +51,7 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
           {/* Logo */}
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
-                src="../img/logo.png" 
+                src="https://6a9ad419d601bb7bf57cab50.imgix.net/sandbox/logo.png" 
                 alt="Logo" 
                 className="w-9 h-9 object-contain rounded-full" 
               />
