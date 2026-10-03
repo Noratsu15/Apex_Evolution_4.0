@@ -59,7 +59,7 @@ export default function RegistrationModal({ open, onClose, plan, onComplete }: R
   const paypalContainerRef = useRef<HTMLDivElement>(null);
   const buttonsRenderedRef = useRef(false);
 
-  const paypalClientId = import.meta.env.PAYPAL_CLIENT_ID as string;
+  const paypalClientId = import.meta.env.VITE_PAYPAL_CLIENT_ID as string;
 
   // Get localized plan display name
   const localizedPlanName = plan ? (getLocalizedPlan(plan.id, t)?.name ?? plan.name) : '';
