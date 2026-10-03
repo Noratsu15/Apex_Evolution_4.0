@@ -3,7 +3,7 @@ import type { Translations } from '@/i18n';
 
 export const PLANS: Plan[] = [
   {
-    id: 'starter',
+    id: 'Membresía Franquiciado',
     name: 'Membresía Franquiciado',
     price: 200,
     tagline: 'Quienes buscan la máxima libertad financiera (Mantenimiento Mensual de $100 USD ).',
@@ -14,7 +14,7 @@ export const PLANS: Plan[] = [
     ],
   },
   {
-    id: 'pro',
+    id: 'Membresía Élite ($200 USD/Anual)',
     name: 'Membresía Élite ($200 USD/Anual)',
     price: 200,
     tagline: 'Emprendedores y empresarios que buscan resaltar en el networking y potenciar su marketing.',
