@@ -24,10 +24,24 @@ function loadPayPalSdk(clientId: string): Promise<void> {
   if (window.paypal) return Promise.resolve();
 
   paypalSdkPromise = new Promise<void>((resolve, reject) => {
+    if (!clientId){
+      reject(new Error('PayPal client ID no configurado o no encontrado'));
+      return;
+    }
+
+    //Evitar duplicados
+    const existingScript = document.querySelector(`script[src*="paypal.com/sdk/js"]`);
+    if (existingScript) {
+      existingScript.remove();
+    }
+
     const script = document.createElement('script');
     script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD&intent=capture`;
     script.onload = () => resolve();
-    script.onerror = () => reject(new Error('Failed to load PayPal SDK'));
+    script.onerror = () => {
+      paypalSdkPromise = null
+      reject(new Error('Failed to load PayPal SDK'));
+    };
     document.head.appendChild(script);
   });
 
@@ -372,6 +386,7 @@ export default function RegistrationModal({ open, onClose, plan, onComplete }: R
               </p>
               <button
                 onClick={() => {
+                  paypalSdkPromise = null;
                   setStep('payment');
                   setErrorMsg(null);
                   buttonsRenderedRef.current = false;

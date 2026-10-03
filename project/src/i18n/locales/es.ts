@@ -12,7 +12,7 @@ const es: Translations = {
     getStarted: 'Comenzar',
   },
   hero: {
-    badge: 'Ahora en beta pública — únete a más de 12,000 usuarios',
+    badge: 'Ahora en beta pública — únete y se de los primeros usuarios',
     headline1: 'Construye, lanza y escala',
     headline2: 'más rápido que nunca',
     subtext:
@@ -142,7 +142,7 @@ const es: Translations = {
         name: 'Sarah Chen',
         role: 'CTO, TechFlow',
         content:
-          'Nexus transformó nuestro proceso de despliegue. Lo que solía tomar semanas ahora toma minutos. El panel de analíticas por sí solo ha pagado la suscripción diez veces.',
+          'Apex Evolution 4.0 transformó nuestro proceso de despliegue. Lo que solía tomar semanas ahora toma minutos. El panel de analíticas por sí solo ha pagado la suscripción diez veces.',
       },
       {
         name: 'Marcus Rodriguez',
@@ -154,7 +154,7 @@ const es: Translations = {
         name: 'Aisha Patel',
         role: 'Ingeniera Principal, CloudNine',
         content:
-          'He probado todas las plataformas. Nexus es la única que combina potencia con simplicidad. El CDN global es increíblemente rápido.',
+          'He probado todas las plataformas. Apex Evolution 4.0 es la única que combina potencia con simplicidad. El CDN global es increíblemente rápido.',
       },
     ],
   },
@@ -192,7 +192,7 @@ const es: Translations = {
   cta: {
     title: '¿Listo para construir algo genial?',
     subtitle:
-      'Únete a miles de equipos que ya usan Nexus para lanzar más rápido. Comienza tu prueba gratuita hoy, no se requiere tarjeta de crédito.',
+      'Únete a miles de usuarios que ya usan Apex Evolution 4.0 para mejorar tu calidad de vida. Comienza tu prueba hoy, no se requiere tarjeta de crédito.',
     button: 'Comenzar Prueba Gratis',
   },
   footer: {
@@ -212,7 +212,7 @@ const es: Translations = {
   auth: {
     createAccount: 'Crea tu cuenta',
     welcomeBack: 'Bienvenido de nuevo',
-    signUpSubtitle: 'Regístrate para comenzar con Nexus',
+    signUpSubtitle: 'Regístrate para comenzar con Apex Evolution 4.0',
     signInSubtitle: 'Inicia sesión para acceder a tu panel',
     fullName: 'Nombre Completo',
     fullNamePlaceholder: 'Juan Pérez',
@@ -250,7 +250,7 @@ const es: Translations = {
     processing: 'Procesando tu pago...',
     processingDesc:
       'Por favor espera mientras procesamos de forma segura tu pago de PayPal y configuramos tu cuenta. No cierres esta ventana.',
-    success: '¡Bienvenido a Nexus!',
+    success: '¡Bienvenido a Apex Evolution 4.0!',
     successDesc:
       'Tu registro está completo. Tu plan ya está activo. Redirigiendo a tu panel...',
     loadingDashboard: 'Cargando panel...',
