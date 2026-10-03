@@ -10,7 +10,7 @@
  *   PAYPAL_API_BASE     — PayPal API base URL (sandbox or live)
  */
 
-const PAYPAL_API_BASE = process.env.PAYPAL_API_BASE || 'https://api-m.sandbox.paypal.com';
+const PAYPAL_API_BASE = process.env.PAYPAL_API_BASE || 'https://api-m.paypal.com';
 
 async function getAccessToken(clientId: string, clientSecret: string): Promise<string> {
   const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
