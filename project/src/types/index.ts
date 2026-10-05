@@ -36,6 +36,30 @@ export interface PaymentRecord {
   updated_at: string;
 }
 
+export type MotherLineRole = 'founder_mentor' | 'mentor' | 'leader';
+
+export interface MotherLineMember {
+  id: string;
+  full_name: string;
+  role: MotherLineRole;
+  slug: string;
+  sort_order: number;
+  is_me: boolean;
+}
+
+export type ReferralPaymentStatus = 'completed' | 'pending' | 'failed' | 'none';
+
+export interface Referral {
+  referral_id: string;
+  leader_id: string;
+  full_name: string;
+  email: string;
+  plan: string | null;
+  payment_status: ReferralPaymentStatus;
+  amount_paid: number;
+  referred_at: string;
+}
+
 declare global {
   interface Window {
     paypal?: {

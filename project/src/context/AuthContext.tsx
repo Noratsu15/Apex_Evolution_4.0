@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
+import { claimStoredReferral } from '@/lib/referrals';
 
 interface AuthContextValue {
   user: User | null;
@@ -35,6 +36,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       authListener.subscription.unsubscribe();
     };
   }, []);
+
+  // Attribute new accounts to the referral link they arrived through.
+  const userId = user?.id;
+  useEffect(() => {
+    if (!userId) return;
+    void claimStoredReferral();
+  }, [userId]);
 
   const signUp = async (email: string, password: string, fullName: string) => {
     const { error } = await supabase.auth.signUp({

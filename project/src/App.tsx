@@ -13,6 +13,7 @@ import Footer from '@/components/Footer';
 import AuthModal from '@/components/AuthModal';
 import RegistrationModal from '@/components/RegistrationModal';
 import Dashboard from '@/components/Dashboard';
+import ReferralBanner from '@/components/ReferralBanner';
 import type { Plan, Registration } from '@/types';
 
 type View = 'landing' | 'dashboard';
@@ -90,6 +91,7 @@ function AppContent() {
         <CTA onGetStarted={handleGetStarted} />
       </main>
       <Footer />
+      <ReferralBanner />
 
       <AuthModal
         open={authModalOpen}
