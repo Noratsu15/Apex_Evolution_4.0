@@ -4,7 +4,9 @@ import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { supabase } from '@/lib/supabase';
 import { getLocalizedPlan } from '@/data/plans';
-import type { Registration } from '@/types';
+import { fetchMyMotherLineMembers } from '@/lib/referrals';
+import Referrals from '@/components/Referrals';
+import type { MotherLineMember, Registration } from '@/types';
 
 interface DashboardProps {
   onBackHome: () => void;
@@ -15,6 +17,16 @@ export default function Dashboard({ onBackHome }: DashboardProps) {
   const { t } = useLanguage();
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [loading, setLoading] = useState(true);
+  const [members, setMembers] = useState<MotherLineMember[]>([]);
+  const [tab, setTab] = useState<'activations' | 'referrals'>('activations');
+
+  // Mother-line members (founder, mentors, leaders) get the Referrals tab.
+  useEffect(() => {
+    if (!user) return;
+    fetchMyMotherLineMembers()
+      .then(setMembers)
+      .catch(() => setMembers([]));
+  }, [user]);
 
   useEffect(() => {
     if (!user) return;
@@ -86,6 +98,30 @@ export default function Dashboard({ onBackHome }: DashboardProps) {
           <p className="text-slate-400">{t.dashboard.manageSubs}</p>
         </div>
 
+        {members.length > 0 && (
+          <div className="flex gap-2 mb-8 border-b border-slate-800" role="tablist">
+            {(['activations', 'referrals'] as const).map((key) => (
+              <button
+                key={key}
+                role="tab"
+                aria-selected={tab === key}
+                onClick={() => setTab(key)}
+                className={`px-4 py-3 text-sm font-semibold border-b-2 -mb-px transition-colors ${
+                  tab === key
+                    ? 'border-sky-400 text-white'
+                    : 'border-transparent text-slate-400 hover:text-white'
+                }`}
+              >
+                {key === 'activations' ? t.referrals.tabActivations : t.referrals.tabReferrals}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {tab === 'referrals' && members.length > 0 ? (
+          <Referrals members={members} />
+        ) : (
+        <>
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
@@ -190,6 +226,8 @@ export default function Dashboard({ onBackHome }: DashboardProps) {
             </div>
           )}
         </div>
+        </>
+        )}
       </div>
     </div>
   );
