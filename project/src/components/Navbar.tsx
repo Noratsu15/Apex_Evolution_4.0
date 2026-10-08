@@ -4,6 +4,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { LANGUAGES } from '@/i18n';
 import LanguageSelector from '@/components/LanguageSelector';
+import { getLlcStrings } from '@/i18n/llc';
 
 interface NavbarProps {
   onGetStarted: () => void;
@@ -28,6 +29,7 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
   const navLinks = [
     { label: t.nav.features, href: '#features' },
     { label: t.nav.pricing, href: '#pricing' },
+    { label: getLlcStrings(lang).navLabel, href: '#llc' },
     { label: t.nav.howItWorks, href: '#how-it-works' },
     { label: t.nav.faq, href: '#faq' },
   ];

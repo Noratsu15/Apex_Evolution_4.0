@@ -6,19 +6,23 @@ import { supabase } from '@/lib/supabase';
 import { getLocalizedPlan } from '@/data/plans';
 import { fetchMyMotherLineMembers } from '@/lib/referrals';
 import Referrals from '@/components/Referrals';
-import type { MotherLineMember, Registration } from '@/types';
+import MyLLC from '@/components/MyLLC';
+import { getLlcStrings } from '@/i18n/llc';
+import type { DashboardTab, MotherLineMember, Registration } from '@/types';
 
 interface DashboardProps {
   onBackHome: () => void;
+  onBuyLlc: () => void;
+  initialTab?: DashboardTab;
 }
 
-export default function Dashboard({ onBackHome }: DashboardProps) {
+export default function Dashboard({ onBackHome, onBuyLlc, initialTab = 'activations' }: DashboardProps) {
   const { user, signOut } = useAuth();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [loading, setLoading] = useState(true);
   const [members, setMembers] = useState<MotherLineMember[]>([]);
-  const [tab, setTab] = useState<'activations' | 'referrals'>('activations');
+  const [tab, setTab] = useState<DashboardTab>(initialTab);
 
   // Mother-line members (founder, mentors, leaders) get the Referrals tab.
   useEffect(() => {
@@ -52,6 +56,13 @@ export default function Dashboard({ onBackHome }: DashboardProps) {
     .slice(0, 2)
     .join('')
     .toUpperCase();
+
+  const llcLabel = getLlcStrings(lang).portal.tab;
+  const tabList: { key: DashboardTab; label: string }[] = [
+    { key: 'activations', label: t.referrals.tabActivations },
+    { key: 'llc', label: llcLabel },
+    ...(members.length > 0 ? [{ key: 'referrals' as const, label: t.referrals.tabReferrals }] : []),
+  ];
 
   const statusLabel = (status: string) => {
     if (status === 'completed') return t.dashboard.completed;
@@ -98,28 +109,28 @@ export default function Dashboard({ onBackHome }: DashboardProps) {
           <p className="text-slate-400">{t.dashboard.manageSubs}</p>
         </div>
 
-        {members.length > 0 && (
-          <div className="flex gap-2 mb-8 border-b border-slate-800" role="tablist">
-            {(['activations', 'referrals'] as const).map((key) => (
-              <button
-                key={key}
-                role="tab"
-                aria-selected={tab === key}
-                onClick={() => setTab(key)}
-                className={`px-4 py-3 text-sm font-semibold border-b-2 -mb-px transition-colors ${
-                  tab === key
-                    ? 'border-sky-400 text-white'
-                    : 'border-transparent text-slate-400 hover:text-white'
-                }`}
-              >
-                {key === 'activations' ? t.referrals.tabActivations : t.referrals.tabReferrals}
-              </button>
-            ))}
-          </div>
-        )}
+        <div className="flex gap-2 mb-8 border-b border-slate-800 overflow-x-auto" role="tablist">
+          {tabList.map((item) => (
+            <button
+              key={item.key}
+              role="tab"
+              aria-selected={tab === item.key}
+              onClick={() => setTab(item.key)}
+              className={`px-4 py-3 text-sm font-semibold border-b-2 -mb-px whitespace-nowrap transition-colors ${
+                tab === item.key
+                  ? 'border-sky-400 text-white'
+                  : 'border-transparent text-slate-400 hover:text-white'
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
 
         {tab === 'referrals' && members.length > 0 ? (
           <Referrals members={members} />
+        ) : tab === 'llc' ? (
+          <MyLLC onBuyLlc={onBuyLlc} />
         ) : (
         <>
         {/* Stats */}

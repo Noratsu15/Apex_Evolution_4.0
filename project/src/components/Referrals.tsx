@@ -333,7 +333,9 @@ export default function Referrals({ members }: ReferralsProps) {
                   </div>
                   <div className="flex items-center gap-4 sm:justify-end">
                     {ref.plan && (
-                      <span className="text-xs text-slate-400 hidden md:inline">{plan?.name ?? ref.plan}</span>
+                      <span className="text-xs text-slate-400 hidden md:inline">
+                        {ref.product === 'llc' ? 'LLC' : ref.product === 'both' ? `${plan?.name ?? ref.plan} + LLC` : plan?.name ?? ref.plan}
+                      </span>
                     )}
                     {ref.payment_status === 'completed' && (
                       <span className="text-sm font-bold text-white">${ref.amount_paid.toFixed(2)}</span>

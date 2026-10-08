@@ -14,7 +14,10 @@ import AuthModal from '@/components/AuthModal';
 import RegistrationModal from '@/components/RegistrationModal';
 import Dashboard from '@/components/Dashboard';
 import ReferralBanner from '@/components/ReferralBanner';
-import type { Plan, Registration } from '@/types';
+import LLCSection from '@/components/LLCSection';
+import LLCOrderModal from '@/components/LLCOrderModal';
+import ServiceChooser from '@/components/ServiceChooser';
+import type { DashboardTab, Plan, Registration } from '@/types';
 
 type View = 'landing' | 'dashboard';
 
@@ -25,6 +28,9 @@ function AppContent() {
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
   const [regModalOpen, setRegModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+  const [chooserOpen, setChooserOpen] = useState(false);
+  const [llcModalOpen, setLlcModalOpen] = useState(false);
+  const [dashboardTab, setDashboardTab] = useState<DashboardTab>('activations');
 
   // Redirect to dashboard if user is logged in and tries to access dashboard view
   useEffect(() => {
@@ -33,13 +39,24 @@ function AppContent() {
     }
   }, [view, user, loading]);
 
+  // Entry point: users choose between a membership and the LLC formation service.
   const handleGetStarted = () => {
     if (user) {
+      setDashboardTab('activations');
       setView('dashboard');
     } else {
-      setSelectedPlan(null);
-      setRegModalOpen(true);
+      setChooserOpen(true);
     }
+  };
+
+  const handleChooseMembership = () => {
+    setChooserOpen(false);
+    document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleGetLlc = () => {
+    setChooserOpen(false);
+    setLlcModalOpen(true);
   };
 
   const handleSelectPlan = (plan: Plan) => {
@@ -53,6 +70,7 @@ function AppContent() {
   };
 
   const handleDashboard = () => {
+    setDashboardTab('activations');
     setView('dashboard');
   };
 
@@ -71,7 +89,18 @@ function AppContent() {
   }
 
   if (view === 'dashboard' && user) {
-    return <Dashboard onBackHome={() => setView('landing')} />;
+    return (
+      <>
+        <Dashboard
+          onBackHome={() => setView('landing')}
+          initialTab={dashboardTab}
+          onBuyLlc={() => {
+            setView('landing');
+            setLlcModalOpen(true);
+          }}
+        />
+      </>
+    );
   }
 
   return (
@@ -86,6 +115,7 @@ function AppContent() {
         <Features />
         <HowItWorks />
         <Pricing onSelectPlan={handleSelectPlan} />
+        <LLCSection onGetLlc={handleGetLlc} />
         <Testimonials />
         <FAQ />
         <CTA onGetStarted={handleGetStarted} />
@@ -99,6 +129,23 @@ function AppContent() {
         onClose={() => setAuthModalOpen(false)}
         onSuccess={() => {
           setAuthModalOpen(false);
+          setView('dashboard');
+        }}
+      />
+
+      <ServiceChooser
+        open={chooserOpen}
+        onClose={() => setChooserOpen(false)}
+        onChooseMembership={handleChooseMembership}
+        onChooseLlc={handleGetLlc}
+      />
+
+      <LLCOrderModal
+        open={llcModalOpen}
+        onClose={() => setLlcModalOpen(false)}
+        onComplete={() => {
+          setLlcModalOpen(false);
+          setDashboardTab('llc');
           setView('dashboard');
         }}
       />

@@ -4,6 +4,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { supabase } from '@/lib/supabase';
 import AuthModal from '@/components/AuthModal';
+import { loadPayPalSdk, resetPayPalSdk } from '@/lib/paypal';
 import { getLocalizedPlan } from '@/data/plans';
 import type { Plan, Registration } from '@/types';
 
@@ -15,38 +16,6 @@ interface RegistrationModalProps {
 }
 
 type Step = 'auth' | 'payment' | 'processing' | 'success' | 'error';
-
-// PayPal SDK loader with singleton caching
-let paypalSdkPromise: Promise<void> | null = null;
-
-function loadPayPalSdk(clientId: string): Promise<void> {
-  if (paypalSdkPromise) return paypalSdkPromise;
-  if (window.paypal) return Promise.resolve();
-
-  paypalSdkPromise = new Promise<void>((resolve, reject) => {
-    if (!clientId){
-      reject(new Error('PayPal client ID no configurado o no encontrado'));
-      return;
-    }
-
-    //Evitar duplicados
-    const existingScript = document.querySelector(`script[src*="paypal.com/sdk/js"]`);
-    if (existingScript) {
-      existingScript.remove();
-    }
-
-    const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD&intent=capture`;
-    script.onload = () => resolve();
-    script.onerror = () => {
-      paypalSdkPromise = null
-      reject(new Error('Failed to load PayPal SDK'));
-    };
-    document.head.appendChild(script);
-  });
-
-  return paypalSdkPromise;
-}
 
 export default function RegistrationModal({ open, onClose, plan, onComplete }: RegistrationModalProps) {
   const { user } = useAuth();
@@ -386,7 +355,7 @@ export default function RegistrationModal({ open, onClose, plan, onComplete }: R
               </p>
               <button
                 onClick={() => {
-                  paypalSdkPromise = null;
+                  resetPayPalSdk();
                   setStep('payment');
                   setErrorMsg(null);
                   buttonsRenderedRef.current = false;

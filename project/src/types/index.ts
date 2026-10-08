@@ -47,6 +47,8 @@ export interface MotherLineMember {
   is_me: boolean;
 }
 
+export type ReferralProduct = 'membership' | 'llc' | 'both';
+
 export type ReferralPaymentStatus = 'completed' | 'pending' | 'failed' | 'none';
 
 export interface Referral {
@@ -55,9 +57,65 @@ export interface Referral {
   full_name: string;
   email: string;
   plan: string | null;
+  product: ReferralProduct | null;
   payment_status: ReferralPaymentStatus;
   amount_paid: number;
   referred_at: string;
+}
+
+export type DashboardTab = 'activations' | 'llc' | 'referrals';
+
+export type LlcState = 'wyoming' | 'florida';
+export type LlcStageStatus = 'pending' | 'in_progress' | 'completed';
+export type LlcDocType =
+  | 'passport'
+  | 'proof_of_address'
+  | 'selfie'
+  | 'articles_of_organization'
+  | 'operating_agreement'
+  | 'ein_letter'
+  | 'other';
+
+export interface LlcOrder {
+  id: string;
+  user_id: string;
+  email: string;
+  full_name: string;
+  amount_paid: number;
+  payment_status: 'pending' | 'completed' | 'failed';
+  terms_accepted_at: string;
+  terms_version: string;
+  intake_submitted_at: string | null;
+  state: LlcState | null;
+  contact_email: string | null;
+  contact_phone: string | null;
+  name_options: string[] | null;
+  business_description: string | null;
+  business_website: string | null;
+  formation_status: LlcStageStatus;
+  ein_status: LlcStageStatus;
+  bank_status: LlcStageStatus;
+  bank_provider: 'relay' | 'wise' | null;
+  approved_name: string | null;
+  created_at: string;
+}
+
+export interface LlcPartner {
+  id: string;
+  order_id: string;
+  full_name: string;
+  ownership_pct: number;
+}
+
+export interface LlcDocument {
+  id: string;
+  order_id: string;
+  doc_type: LlcDocType;
+  source: 'client' | 'team';
+  label: string | null;
+  file_name: string;
+  storage_path: string;
+  created_at: string;
 }
 
 declare global {
@@ -82,6 +140,7 @@ interface PayPalButtonsConfig {
   };
   createOrder: () => Promise<string>;
   onApprove: (data: { orderID: string }) => Promise<void>;
+  onClick?: (data: unknown, actions: { resolve: () => Promise<void>; reject: () => Promise<void> }) => Promise<void> | void;
   onError?: (err: unknown) => void;
   onCancel?: () => void;
 }
