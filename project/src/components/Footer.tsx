@@ -18,10 +18,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-white">Nexus</span>
+              <img 
+                  src="https://6a9ad419d601bb7bf57cab50.imgix.net/sandbox/logo.png" 
+                  alt="Logo" 
+                  className="w-9 h-9 object-contain rounded-full" 
+                />
+              <span className="text-xl font-bold text-white">Apex Evolution 4.0</span>
             </div>
             <p className="text-sm text-slate-400 max-w-xs mb-6">
               {t.footer.description}
@@ -31,7 +33,7 @@ export default function Footer() {
                 <a
                   key={i}
                   href="#"
-                  className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-sky-500/50 transition-all"
+                  className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-amber-500/50 transition-all"
                   aria-label="Social link"
                 >
                   <Icon className="w-4 h-4" />

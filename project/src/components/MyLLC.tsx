@@ -46,14 +46,14 @@ export default function MyLLC({ onBuyLlc, onOrdersLoaded }: MyLLCProps) {
 
       {loading ? (
         <div className="flex justify-center py-16">
-          <Loader2 className="w-6 h-6 text-sky-400 animate-spin" />
+          <Loader2 className="w-6 h-6 text-amber-400 animate-spin" />
         </div>
       ) : error ? (
         <div className="text-center py-12">
           <p className="text-slate-300 mb-4">{p.loadError}</p>
           <button
             onClick={() => void load()}
-            className="px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400"
+            className="px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400"
           >
             {p.retry}
           </button>
@@ -67,7 +67,7 @@ export default function MyLLC({ onBuyLlc, onOrdersLoaded }: MyLLCProps) {
           <p className="text-slate-400 text-sm mt-1 mb-6">{p.emptyText}</p>
           <button
             onClick={onBuyLlc}
-            className="px-6 py-3 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 transition-all"
+            className="px-6 py-3 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all"
           >
             {p.emptyCta}
           </button>

@@ -102,7 +102,7 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
                 </button>
                 <button
                   onClick={onGetStarted}
-                  className="text-sm font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 hover:scale-[1.03]"
+                  className="text-sm font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-[1.03]"
                 >
                   {SHORT_LABELS[lang].signUpFree}
                 </button>
@@ -163,7 +163,7 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
                     </button>
                     <button
                       onClick={() => { setMobileOpen(false); onGetStarted(); }}
-                      className="block w-full text-center text-sm font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 px-5 py-3 rounded-xl"
+                      className="block w-full text-center text-sm font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 px-5 py-3 rounded-xl"
                     >
                       {SHORT_LABELS[lang].signUpFree}
                     </button>

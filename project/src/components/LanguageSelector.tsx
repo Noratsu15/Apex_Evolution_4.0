@@ -44,7 +44,7 @@ export default function LanguageSelector() {
                 }}
                 className={`flex items-center justify-between w-full px-4 py-2.5 text-sm transition-colors ${
                   l.code === lang
-                    ? 'text-sky-400 bg-sky-500/5'
+                    ? 'text-amber-400 bg-amber-500/5'
                     : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                 }`}
               >

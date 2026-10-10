@@ -95,7 +95,7 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
               </button>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center text-white text-sm font-bold">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-400 flex items-center justify-center text-slate-950 text-sm font-bold">
                 {initials}
               </div>
               <button
@@ -118,7 +118,7 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
           <p className="text-slate-400">{t.dashboard.manageSubs}</p>
         </div>
 
-        <div className="flex gap-2 mb-8 border-b border-slate-800 overflow-x-auto" role="tablist">
+        <div className="flex gap-2 mb-8 border-b border-slate-800 overflow-hidden" role="tablist">
           {tabList.map((item) => (
             <button
               key={item.key}
@@ -127,7 +127,7 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
               onClick={() => setTab(item.key)}
               className={`px-4 py-3 text-sm font-semibold border-b-2 -mb-px whitespace-nowrap transition-colors ${
                 tab === item.key
-                  ? 'border-sky-400 text-white'
+                  ? 'border-amber-400 text-white'
                   : 'border-transparent text-slate-400 hover:text-white'
               }`}
             >
@@ -154,8 +154,8 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center">
-                <CreditCard className="w-5 h-5 text-sky-400" />
+              <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center">
+                <CreditCard className="w-5 h-5 text-amber-400" />
               </div>
               <span className="text-sm text-slate-400">{t.dashboard.activePlans}</span>
             </div>
@@ -176,8 +176,8 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
           </div>
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center">
-                <Clock className="w-5 h-5 text-amber-400" />
+              <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                <Clock className="w-5 h-5 text-orange-400" />
               </div>
               <span className="text-sm text-slate-400">{t.dashboard.totalSpent}</span>
             </div>
@@ -195,7 +195,7 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
 
           {loading ? (
             <div className="flex items-center justify-center py-16">
-              <Loader2 className="w-6 h-6 text-sky-400 animate-spin" />
+              <Loader2 className="w-6 h-6 text-amber-400 animate-spin" />
             </div>
           ) : registrations.length === 0 ? (
             <div className="text-center py-16">
@@ -205,7 +205,7 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
               <p className="text-slate-400 mb-4">{t.dashboard.noRegistrations}</p>
               <button
                 onClick={onBackHome}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all"
               >
                 {t.dashboard.browsePlans}
               </button>
@@ -217,8 +217,8 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
                 return (
                   <div key={reg.id} className="p-6 flex items-center justify-between hover:bg-slate-800/30 transition-colors">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500/20 to-cyan-500/20 border border-sky-500/20 flex items-center justify-center">
-                        <Sparkles className="w-6 h-6 text-sky-400" />
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-yellow-500/20 border border-amber-500/20 flex items-center justify-center">
+                        <Sparkles className="w-6 h-6 text-amber-400" />
                       </div>
                       <div>
                         <div className="text-sm font-bold text-white">
@@ -240,7 +240,7 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
                           reg.payment_status === 'completed'
                             ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
                             : reg.payment_status === 'pending'
-                            ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                            ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
                             : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
                         }`}
                       >

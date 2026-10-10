@@ -208,8 +208,8 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
           {step === 'letter' && (
             <>
               <div className="text-center mb-6">
-                <div className="inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-400 items-center justify-center mb-4 shadow-lg shadow-sky-500/30">
-                  <Building2 className="w-7 h-7 text-white" />
+                <div className="inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-400 items-center justify-center mb-4 shadow-lg shadow-amber-500/30">
+                  <Building2 className="w-7 h-7 text-slate-950" />
                 </div>
                 <h2 className="text-2xl font-bold text-white mb-1">{s.order.letterTitle}</h2>
                 <p className="text-sm text-slate-400">{s.order.letterText}</p>
@@ -220,7 +220,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
               </div>
 
               {!priceReady && (
-                <div className="flex items-start gap-3 p-4 mb-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-sm">
+                <div className="flex items-start gap-3 p-4 mb-4 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-300 text-sm">
                   <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                   <span>{s.order.priceMissing}</span>
                 </div>
@@ -231,7 +231,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
                   type="checkbox"
                   checked={accepted}
                   onChange={(e) => setAccepted(e.target.checked)}
-                  className="mt-1 w-4 h-4 accent-sky-400"
+                  className="mt-1 w-4 h-4 accent-amber-400"
                 />
                 <span className="text-sm text-slate-300">{s.letter.accept}</span>
               </label>
@@ -239,7 +239,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
               <button
                 onClick={goToPayment}
                 disabled={!accepted || !priceReady}
-                className="w-full py-3.5 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full py-3.5 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {s.order.continueToPayment}
               </button>
@@ -250,8 +250,8 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
           {step === 'payment' && (
             <>
               <div className="text-center mb-6">
-                <div className="inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-400 items-center justify-center mb-4 shadow-lg shadow-sky-500/30">
-                  <CreditCard className="w-7 h-7 text-white" />
+                <div className="inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-400 items-center justify-center mb-4 shadow-lg shadow-amber-500/30">
+                  <CreditCard className="w-7 h-7 text-slate-950" />
                 </div>
                 <h2 className="text-2xl font-bold text-white">{s.order.paymentTitle}</h2>
               </div>
@@ -276,7 +276,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
               </div>
 
               {paypalError && (
-                <div className="flex items-start gap-3 p-4 mb-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-sm">
+                <div className="flex items-start gap-3 p-4 mb-4 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-300 text-sm">
                   <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                   <span>{paypalError}</span>
                 </div>
@@ -289,7 +289,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
                 </div>
                 {!paypalLoaded && !paypalError && (
                   <div className="flex items-center justify-center py-8">
-                    <Loader2 className="w-6 h-6 text-sky-400 animate-spin" />
+                    <Loader2 className="w-6 h-6 text-amber-400 animate-spin" />
                     <span className="ml-3 text-sm text-slate-400">{t.registration.loadingCheckout}</span>
                   </div>
                 )}
@@ -308,8 +308,8 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
 
           {step === 'processing' && (
             <div className="text-center py-12">
-              <div className="inline-flex w-20 h-20 rounded-full bg-sky-500/10 border border-sky-500/20 items-center justify-center mb-6">
-                <Loader2 className="w-10 h-10 text-sky-400 animate-spin" />
+              <div className="inline-flex w-20 h-20 rounded-full bg-amber-500/10 border border-amber-500/20 items-center justify-center mb-6">
+                <Loader2 className="w-10 h-10 text-amber-400 animate-spin" />
               </div>
               <h2 className="text-xl font-bold text-white mb-2">{s.order.processing}</h2>
               <p className="text-sm text-slate-400 max-w-xs mx-auto">{s.order.processingDesc}</p>
@@ -344,7 +344,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
                   setErrorMsg(null);
                   setStep('payment');
                 }}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all"
               >
                 {s.order.tryAgain}
               </button>

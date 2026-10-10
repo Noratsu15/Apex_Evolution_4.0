@@ -31,14 +31,14 @@ export default function ReferralBanner() {
       : t.referrals.roleLeader;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 sm:right-auto sm:max-w-sm z-40 flex items-center gap-3 rounded-2xl border border-sky-500/30 bg-slate-900/95 backdrop-blur px-4 py-3 shadow-xl">
-      <div className="w-10 h-10 shrink-0 rounded-xl bg-sky-500/10 flex items-center justify-center">
-        <UserPlus className="w-5 h-5 text-sky-400" />
+    <div className="fixed bottom-4 left-4 right-4 sm:right-auto sm:max-w-sm z-40 flex items-center gap-3 rounded-2xl border border-amber-500/30 bg-slate-900/95 backdrop-blur px-4 py-3 shadow-xl">
+      <div className="w-10 h-10 shrink-0 rounded-xl bg-amber-500/10 flex items-center justify-center">
+        <UserPlus className="w-5 h-5 text-amber-400" />
       </div>
       <div className="min-w-0 flex-1">
         <div className="text-xs text-slate-400">{t.referrals.invitedBy}</div>
         <div className="text-sm font-bold text-white truncate">{referrer.full_name}</div>
-        <div className="text-xs text-sky-300">{roleLabel}</div>
+        <div className="text-xs text-amber-300">{roleLabel}</div>
       </div>
       <button
         type="button"

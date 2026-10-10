@@ -99,8 +99,8 @@ export default function AuthModal({
         </button>
 
         <div className="text-center mb-8">
-          <div className="inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-400 items-center justify-center mb-4 shadow-lg shadow-sky-500/30">
-            <User className="w-7 h-7 text-white" />
+          <div className="inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-400 items-center justify-center mb-4 shadow-lg shadow-amber-500/30">
+            <User className="w-7 h-7 text-slate-950" />
           </div>
           <h2 className="text-2xl font-bold text-white">
             {mode === 'signup' ? t.auth.createAccount : t.auth.welcomeBack}
@@ -129,7 +129,7 @@ export default function AuthModal({
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder={t.auth.fullNamePlaceholder}
                   required
-                  className="w-full pl-12 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"
                 />
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function AuthModal({
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t.auth.emailPlaceholder}
                 required
-                className="w-full pl-12 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                className="w-full pl-12 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"
               />
             </div>
           </div>
@@ -161,7 +161,7 @@ export default function AuthModal({
                 placeholder="••••••••"
                 required
                 minLength={6}
-                className="w-full pl-12 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                className="w-full pl-12 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"
               />
             </div>
           </div>
@@ -169,7 +169,7 @@ export default function AuthModal({
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 transition-all shadow-lg shadow-sky-500/20 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-3.5 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all shadow-lg shadow-amber-500/20 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {loading ? (
               <>
@@ -192,7 +192,7 @@ export default function AuthModal({
                   setError(null);
                   onSwitchToSignIn?.();
                 }}
-                className="text-sky-400 hover:text-sky-300 font-medium transition-colors"
+                className="text-amber-400 hover:text-amber-300 font-medium transition-colors"
               >
                 {t.auth.signInLink}
               </button>
@@ -206,7 +206,7 @@ export default function AuthModal({
                   setError(null);
                   onSwitchToSignUp?.();
                 }}
-                className="text-sky-400 hover:text-sky-300 font-medium transition-colors"
+                className="text-amber-400 hover:text-amber-300 font-medium transition-colors"
               >
                 {t.auth.signUpLink}
               </button>

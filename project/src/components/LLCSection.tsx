@@ -21,7 +21,7 @@ export default function LLCSection({ onGetLlc }: LLCSectionProps) {
     <section id="llc" className="relative py-24 bg-slate-950">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="text-sm font-semibold text-sky-400 uppercase tracking-wider">{s.section.label}</span>
+          <span className="text-sm font-semibold text-amber-400 uppercase tracking-wider">{s.section.label}</span>
           <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
             {s.section.title}
           </h2>
@@ -36,18 +36,18 @@ export default function LLCSection({ onGetLlc }: LLCSectionProps) {
             return (
               <div key={mod.tag} className="bg-slate-900 border border-slate-800 rounded-3xl p-7 flex flex-col">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-11 h-11 rounded-xl bg-sky-500/10 flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-sky-400" />
+                  <div className="w-11 h-11 rounded-xl bg-amber-500/10 flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-amber-400" />
                   </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-sky-400">{mod.tag}</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">{mod.tag}</span>
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2">{mod.title}</h3>
                 <p className="text-sm text-slate-400 mb-5">{mod.intro}</p>
                 <ul className="space-y-3 mt-auto">
                   {mod.items.map((item) => (
                     <li key={item.title} className="flex items-start gap-3">
-                      <div className="mt-0.5 w-5 h-5 rounded-full bg-sky-400/20 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3 h-3 text-sky-400" />
+                      <div className="mt-0.5 w-5 h-5 rounded-full bg-amber-400/20 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3 h-3 text-amber-400" />
                       </div>
                       <div className="text-sm">
                         <span className="font-semibold text-slate-100">{item.title}. </span>
@@ -72,11 +72,11 @@ export default function LLCSection({ onGetLlc }: LLCSectionProps) {
               const range = LLC_TIMELINE[STAGE_KEYS[i]];
               return (
                 <li key={step.title} className="relative bg-slate-950/60 border border-slate-800 rounded-2xl p-6">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sky-500 to-cyan-400 text-slate-950 font-bold text-sm flex items-center justify-center mb-4">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-yellow-400 text-slate-950 font-bold text-sm flex items-center justify-center mb-4">
                     {i + 1}
                   </div>
                   <h4 className="font-bold text-white mb-2">{step.title}</h4>
-                  <div className="inline-flex items-center gap-1.5 text-sm font-semibold text-sky-300 mb-3">
+                  <div className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-300 mb-3">
                     <Clock className="w-4 h-4" />
                     {range.min}–{range.max} {s.timeline.businessDays}
                   </div>
@@ -95,7 +95,7 @@ export default function LLCSection({ onGetLlc }: LLCSectionProps) {
         </div>
 
         {/* Price + CTA + letter */}
-        <div className="max-w-xl mx-auto bg-gradient-to-b from-sky-500/10 to-slate-900 border-2 border-sky-400/40 rounded-3xl p-8 shadow-2xl shadow-sky-500/10 text-center">
+        <div className="max-w-xl mx-auto bg-gradient-to-b from-amber-500/10 to-slate-900 border-2 border-amber-400/40 rounded-3xl p-8 shadow-2xl shadow-amber-500/10 text-center">
           <h3 className="text-xl font-bold text-white mb-4">{s.section.price}</h3>
           {LLC_PRICE_USD > 0 ? (
             <div className="mb-6">
@@ -107,14 +107,14 @@ export default function LLCSection({ onGetLlc }: LLCSectionProps) {
           )}
           <button
             onClick={onGetLlc}
-            className="w-full py-3.5 rounded-xl font-semibold bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 hover:from-sky-300 hover:to-cyan-300 shadow-lg shadow-sky-500/25 transition-all hover:scale-[1.02]"
+            className="w-full py-3.5 rounded-xl font-semibold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 hover:from-amber-300 hover:to-yellow-300 shadow-lg shadow-amber-500/25 transition-all hover:scale-[1.02]"
           >
             {s.section.cta}
           </button>
           <button
             onClick={() => setLetterOpen((v) => !v)}
             aria-expanded={letterOpen}
-            className="mt-4 inline-flex items-center gap-2 text-sm text-sky-300 hover:text-sky-200 transition-colors"
+            className="mt-4 inline-flex items-center gap-2 text-sm text-amber-300 hover:text-amber-200 transition-colors"
           >
             <FileText className="w-4 h-4" />
             {s.section.readLetter}

@@ -53,14 +53,14 @@ export default function ServiceChooser({ open, onClose, onChooseMembership, onCh
             <button
               key={title}
               onClick={onClick}
-              className="text-left bg-slate-950/50 border border-slate-800 hover:border-sky-500/60 rounded-2xl p-6 transition-all hover:-translate-y-0.5"
+              className="text-left bg-slate-950/50 border border-slate-800 hover:border-amber-500/60 rounded-2xl p-6 transition-all hover:-translate-y-0.5"
             >
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-white" />
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-400 flex items-center justify-center mb-4">
+                <Icon className="w-5 h-5 text-slate-950" />
               </div>
               <div className="font-bold text-white mb-1">{title}</div>
               <p className="text-sm text-slate-400 mb-4">{text}</p>
-              <span className="text-sm font-semibold text-sky-300">{cta} →</span>
+              <span className="text-sm font-semibold text-amber-300">{cta} →</span>
             </button>
           ))}
         </div>

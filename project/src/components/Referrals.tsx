@@ -23,8 +23,8 @@ interface ReferralsProps {
 type StatusFilter = 'all' | 'completed' | 'notCompleted';
 
 const ROLE_STYLES: Record<MotherLineRole, string> = {
-  founder_mentor: 'bg-amber-500/10 text-amber-300 border-amber-500/20',
-  mentor: 'bg-sky-500/10 text-sky-300 border-sky-500/20',
+  founder_mentor: 'bg-orange-500/10 text-orange-300 border-orange-500/20',
+  mentor: 'bg-amber-500/10 text-amber-300 border-amber-500/20',
   leader: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20',
 };
 
@@ -128,23 +128,23 @@ export default function Referrals({ members }: ReferralsProps) {
     s === 'completed'
       ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
       : s === 'pending'
-      ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+      ? 'bg-orange-500/10 text-orange-400 border-orange-500/20'
       : s === 'failed'
       ? 'bg-rose-500/10 text-rose-400 border-rose-500/20'
       : 'bg-slate-700/30 text-slate-300 border-slate-600/40';
 
   const stats = [
-    { label: r.totalReferrals, value: String(totals.total), icon: Users, color: 'sky' },
+    { label: r.totalReferrals, value: String(totals.total), icon: Users, color: 'amber' },
     { label: r.activated, value: String(totals.activated), icon: CheckCircle2, color: 'emerald' },
-    { label: r.notActivated, value: String(totals.notActivated), icon: Clock, color: 'amber' },
-    { label: r.revenue, value: `$${totals.revenue.toFixed(2)}`, icon: DollarSign, color: 'cyan' },
+    { label: r.notActivated, value: String(totals.notActivated), icon: Clock, color: 'orange' },
+    { label: r.revenue, value: `$${totals.revenue.toFixed(2)}`, icon: DollarSign, color: 'yellow' },
   ] as const;
 
   const colorMap: Record<string, { bg: string; text: string }> = {
-    sky: { bg: 'bg-sky-500/10', text: 'text-sky-400' },
-    emerald: { bg: 'bg-emerald-500/10', text: 'text-emerald-400' },
     amber: { bg: 'bg-amber-500/10', text: 'text-amber-400' },
-    cyan: { bg: 'bg-cyan-500/10', text: 'text-cyan-400' },
+    emerald: { bg: 'bg-emerald-500/10', text: 'text-emerald-400' },
+    orange: { bg: 'bg-orange-500/10', text: 'text-orange-400' },
+    yellow: { bg: 'bg-yellow-500/10', text: 'text-yellow-400' },
   };
 
   return (
@@ -171,7 +171,7 @@ export default function Referrals({ members }: ReferralsProps) {
               <div
                 key={m.id}
                 className={`bg-slate-900 border rounded-2xl p-5 transition-colors ${
-                  selected ? 'border-sky-500/60' : 'border-slate-800'
+                  selected ? 'border-amber-500/60' : 'border-slate-800'
                 }`}
               >
                 <button
@@ -180,7 +180,7 @@ export default function Referrals({ members }: ReferralsProps) {
                   className={`flex w-full items-center gap-3 text-left ${showAll ? 'cursor-pointer' : 'cursor-default'}`}
                   aria-pressed={showAll ? selected : undefined}
                 >
-                  <div className="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center text-white text-sm font-bold">
+                  <div className="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-400 flex items-center justify-center text-slate-950 text-sm font-bold">
                     {initialsOf(m.full_name)}
                   </div>
                   <div className="min-w-0">
@@ -207,7 +207,7 @@ export default function Referrals({ members }: ReferralsProps) {
                   <button
                     type="button"
                     onClick={() => copy(m.slug)}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 transition-all"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all"
                   >
                     {copiedSlug === m.slug ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     {copiedSlug === m.slug ? r.copied : r.copyLink}
@@ -244,14 +244,14 @@ export default function Referrals({ members }: ReferralsProps) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={r.searchPlaceholder}
-              className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500/60"
+              className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/60"
             />
           </div>
           {showAll && (
             <select
               value={leaderFilter}
               onChange={(e) => setLeaderFilter(e.target.value)}
-              className="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-sky-500/60"
+              className="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-amber-500/60"
             >
               <option value="all">{r.allLeaders}</option>
               {members.map((m) => (
@@ -264,7 +264,7 @@ export default function Referrals({ members }: ReferralsProps) {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value as StatusFilter)}
-            className="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-sky-500/60"
+            className="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 focus:outline-none focus:border-amber-500/60"
           >
             <option value="all">{r.allStatuses}</option>
             <option value="completed">{r.activated}</option>
@@ -274,7 +274,7 @@ export default function Referrals({ members }: ReferralsProps) {
 
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <Loader2 className="w-6 h-6 text-sky-400 animate-spin" />
+            <Loader2 className="w-6 h-6 text-amber-400 animate-spin" />
           </div>
         ) : error ? (
           <div className="text-center py-16 px-4">
@@ -283,7 +283,7 @@ export default function Referrals({ members }: ReferralsProps) {
             <button
               type="button"
               onClick={() => void load()}
-              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 transition-all"
+              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all"
             >
               {r.retry}
             </button>
@@ -309,7 +309,7 @@ export default function Referrals({ members }: ReferralsProps) {
                   className="p-4 sm:p-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between hover:bg-slate-800/30 transition-colors"
                 >
                   <div className="flex items-center gap-4 min-w-0">
-                    <div className="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-sky-500/20 to-cyan-500/20 border border-sky-500/20 flex items-center justify-center text-sky-300 text-sm font-bold">
+                    <div className="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-amber-500/20 to-yellow-500/20 border border-amber-500/20 flex items-center justify-center text-amber-300 text-sm font-bold">
                       {initialsOf(ref.full_name || ref.email)}
                     </div>
                     <div className="min-w-0">

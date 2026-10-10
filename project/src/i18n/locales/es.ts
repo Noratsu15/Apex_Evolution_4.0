@@ -212,7 +212,7 @@ const es: Translations = {
   auth: {
     createAccount: 'Crea tu cuenta de miembro',
     welcomeBack: 'Te damos la bienvenida de nuevo',
-    signUpSubtitle: 'Regístrate para activar tu membresía en Apex Evolution 4.0',
+    signUpSubtitle: 'Regístrate en Apex Evolution 4.0',
     signInSubtitle: 'Inicia sesión para acceder a tu portal de miembro',
     fullName: 'Nombre Completo',
     fullNamePlaceholder: 'Juan Pérez',
@@ -221,7 +221,7 @@ const es: Translations = {
     password: 'Contraseña',
     creatingAccount: 'Creando tu acceso...',
     signingIn: 'Abriendo tu portal...',
-    createAccountBtn: 'Activar Membresía',
+    createAccountBtn: 'Registro Gratuito',
     signInBtn: 'Entrar al Portal',
     alreadyHaveAccount: '¿Ya tienes cuenta?',
     dontHaveAccount: '¿Aún no estás inscrito?',

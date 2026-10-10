@@ -16,14 +16,14 @@ export default function LLCLetter() {
 
       {letter.sections.map((section) => (
         <section key={section.heading}>
-          <h4 className="font-semibold text-sky-300 mb-2">{section.heading}</h4>
+          <h4 className="font-semibold text-amber-300 mb-2">{section.heading}</h4>
           {section.paragraphs?.map((p) => (
             <p key={p} className="mb-2">
               {p}
             </p>
           ))}
           {section.items && (
-            <ul className="space-y-1.5 list-disc pl-5 marker:text-sky-500">
+            <ul className="space-y-1.5 list-disc pl-5 marker:text-amber-500">
               {section.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}

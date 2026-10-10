@@ -14,9 +14,9 @@ export default function CTA({ onGetStarted }: CTAProps) {
   return (
     <section className="relative py-24 bg-slate-950">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-gradient-to-br from-sky-500/20 via-slate-900 to-cyan-500/20 border border-sky-500/20 p-12 md:p-16 text-center overflow-hidden">
+        <div className="relative rounded-3xl bg-gradient-to-br from-amber-500/20 via-slate-900 to-yellow-500/20 border border-amber-500/20 p-12 md:p-16 text-center overflow-hidden">
           {/* Glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-sky-500/20 blur-[100px] rounded-full" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-amber-500/20 blur-[100px] rounded-full" />
 
           <div className="relative">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
@@ -27,7 +27,7 @@ export default function CTA({ onGetStarted }: CTAProps) {
             </p>
             <button
               onClick={onGetStarted}
-              className="group inline-flex items-center gap-2 text-base font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 px-8 py-4 rounded-xl transition-all shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.03]"
+              className="group inline-flex items-center gap-2 text-base font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 px-8 py-4 rounded-xl transition-all shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.03]"
             >
               {user ? t.hero.ctaPrimaryUser : SHORT_LABELS[lang].signUpFree}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

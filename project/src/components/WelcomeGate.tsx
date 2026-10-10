@@ -97,12 +97,12 @@ export default function WelcomeGate({ onBuyMembership, onBuyLlc }: WelcomeGatePr
           </div>
 
           <section>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-sky-400 mb-3">{o.welcome.stepWhatsapp}</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3">{o.welcome.stepWhatsapp}</h3>
             <WhatsAppJoinCard joined={joined} onJoined={() => setJoined(true)} />
           </section>
 
           <section>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-sky-400 mb-3">{o.welcome.stepNext}</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3">{o.welcome.stepNext}</h3>
             <ServiceOptions
               onMembership={() => finish(onBuyMembership)}
               onLlc={() => finish(onBuyLlc)}
