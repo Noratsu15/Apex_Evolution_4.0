@@ -1,6 +1,7 @@
-import { ArrowRight, Play, Check } from 'lucide-react';
+import { ArrowRight, Play, Check, Sparkles, Building2 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { SHORT_LABELS } from '@/i18n/onboarding';
 
 interface HeroProps {
   onGetStarted: () => void;
@@ -8,7 +9,7 @@ interface HeroProps {
 
 export default function Hero({ onGetStarted }: HeroProps) {
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const trustItems = [t.hero.trust1, t.hero.trust2, t.hero.trust3];
 
@@ -58,7 +59,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
               onClick={onGetStarted}
               className="group inline-flex items-center gap-2 text-base font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 px-8 py-4 rounded-xl transition-all shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.03]"
             >
-              {user ? t.hero.ctaPrimaryUser : t.hero.ctaPrimary}
+              {user ? t.hero.ctaPrimaryUser : SHORT_LABELS[lang].signUpFree}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
@@ -67,6 +68,25 @@ export default function Hero({ onGetStarted }: HeroProps) {
             >
               <Play className="w-4 h-4 fill-current" />
               {t.hero.ctaSecondary}
+            </button>
+          </div>
+
+          {/* Direct paths: membership or LLC */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-12 animate-[fadeInUp_0.95s_ease-out]">
+            <span className="text-sm text-slate-500">{SHORT_LABELS[lang].or}:</span>
+            <button
+              onClick={() => document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-sky-300 border border-sky-500/30 hover:border-sky-400 hover:bg-sky-500/10 px-5 py-2.5 rounded-full transition-all"
+            >
+              <Sparkles className="w-4 h-4" />
+              {SHORT_LABELS[lang].membership}
+            </button>
+            <button
+              onClick={() => document.querySelector('#llc')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-sky-300 border border-sky-500/30 hover:border-sky-400 hover:bg-sky-500/10 px-5 py-2.5 rounded-full transition-all"
+            >
+              <Building2 className="w-4 h-4" />
+              {SHORT_LABELS[lang].llc}
             </button>
           </div>
 

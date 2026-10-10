@@ -16,7 +16,7 @@ import Dashboard from '@/components/Dashboard';
 import ReferralBanner from '@/components/ReferralBanner';
 import LLCSection from '@/components/LLCSection';
 import LLCOrderModal from '@/components/LLCOrderModal';
-import ServiceChooser from '@/components/ServiceChooser';
+import WelcomeGate from '@/components/WelcomeGate';
 import type { DashboardTab, Plan, Registration } from '@/types';
 
 type View = 'landing' | 'dashboard';
@@ -28,7 +28,6 @@ function AppContent() {
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
   const [regModalOpen, setRegModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
-  const [chooserOpen, setChooserOpen] = useState(false);
   const [llcModalOpen, setLlcModalOpen] = useState(false);
   const [dashboardTab, setDashboardTab] = useState<DashboardTab>('activations');
 
@@ -39,23 +38,24 @@ function AppContent() {
     }
   }, [view, user, loading]);
 
-  // Entry point: users choose between a membership and the LLC formation service.
+  // Sign-up is free: visitors create an account, then the welcome modal guides them.
   const handleGetStarted = () => {
     if (user) {
       setDashboardTab('activations');
       setView('dashboard');
     } else {
-      setChooserOpen(true);
+      setAuthMode('signup');
+      setAuthModalOpen(true);
     }
   };
 
-  const handleChooseMembership = () => {
-    setChooserOpen(false);
-    document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' });
+  const handleBuyMembership = () => {
+    setView('landing');
+    setTimeout(() => document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' }), 150);
   };
 
   const handleGetLlc = () => {
-    setChooserOpen(false);
+    setView('landing');
     setLlcModalOpen(true);
   };
 
@@ -88,22 +88,15 @@ function AppContent() {
     );
   }
 
-  if (view === 'dashboard' && user) {
-    return (
-      <>
-        <Dashboard
-          onBackHome={() => setView('landing')}
-          initialTab={dashboardTab}
-          onBuyLlc={() => {
-            setView('landing');
-            setLlcModalOpen(true);
-          }}
-        />
-      </>
-    );
-  }
-
-  return (
+  const page =
+    view === 'dashboard' && user ? (
+      <Dashboard
+        onBackHome={() => setView('landing')}
+        initialTab={dashboardTab}
+        onBuyLlc={handleGetLlc}
+        onBuyMembership={handleBuyMembership}
+      />
+    ) : (
     <div className="min-h-screen bg-slate-950">
       <Navbar
         onGetStarted={handleGetStarted}
@@ -133,13 +126,6 @@ function AppContent() {
         }}
       />
 
-      <ServiceChooser
-        open={chooserOpen}
-        onClose={() => setChooserOpen(false)}
-        onChooseMembership={handleChooseMembership}
-        onChooseLlc={handleGetLlc}
-      />
-
       <LLCOrderModal
         open={llcModalOpen}
         onClose={() => setLlcModalOpen(false)}
@@ -160,6 +146,14 @@ function AppContent() {
         onComplete={handleRegComplete}
       />
     </div>
+    );
+
+  // WelcomeGate stays mounted across view changes so it never re-opens by mistake.
+  return (
+    <>
+      {page}
+      <WelcomeGate onBuyMembership={handleBuyMembership} onBuyLlc={handleGetLlc} />
+    </>
   );
 }
 

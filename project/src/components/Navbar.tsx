@@ -5,6 +5,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { LANGUAGES } from '@/i18n';
 import LanguageSelector from '@/components/LanguageSelector';
 import { getLlcStrings } from '@/i18n/llc';
+import { SHORT_LABELS } from '@/i18n/onboarding';
 
 interface NavbarProps {
   onGetStarted: () => void;
@@ -103,7 +104,7 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
                   onClick={onGetStarted}
                   className="text-sm font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 hover:scale-[1.03]"
                 >
-                  {t.nav.getStarted}
+                  {SHORT_LABELS[lang].signUpFree}
                 </button>
               </>
             )}
@@ -164,7 +165,7 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
                       onClick={() => { setMobileOpen(false); onGetStarted(); }}
                       className="block w-full text-center text-sm font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 px-5 py-3 rounded-xl"
                     >
-                      {t.nav.getStarted}
+                      {SHORT_LABELS[lang].signUpFree}
                     </button>
                   </>
                 )}

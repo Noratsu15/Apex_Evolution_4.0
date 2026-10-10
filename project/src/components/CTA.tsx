@@ -1,12 +1,15 @@
 import { ArrowRight } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { SHORT_LABELS } from '@/i18n/onboarding';
 
 interface CTAProps {
   onGetStarted: () => void;
 }
 
 export default function CTA({ onGetStarted }: CTAProps) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const { user } = useAuth();
 
   return (
     <section className="relative py-24 bg-slate-950">
@@ -26,7 +29,7 @@ export default function CTA({ onGetStarted }: CTAProps) {
               onClick={onGetStarted}
               className="group inline-flex items-center gap-2 text-base font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 px-8 py-4 rounded-xl transition-all shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.03]"
             >
-              {t.cta.button}
+              {user ? t.hero.ctaPrimaryUser : SHORT_LABELS[lang].signUpFree}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>

@@ -7,29 +7,38 @@ import { getLocalizedPlan } from '@/data/plans';
 import { fetchMyMotherLineMembers } from '@/lib/referrals';
 import Referrals from '@/components/Referrals';
 import MyLLC from '@/components/MyLLC';
+import NextSteps from '@/components/NextSteps';
+import { fetchOnboarding } from '@/lib/onboarding';
 import { getLlcStrings } from '@/i18n/llc';
 import type { DashboardTab, MotherLineMember, Registration } from '@/types';
 
 interface DashboardProps {
   onBackHome: () => void;
   onBuyLlc: () => void;
+  onBuyMembership: () => void;
   initialTab?: DashboardTab;
 }
 
-export default function Dashboard({ onBackHome, onBuyLlc, initialTab = 'activations' }: DashboardProps) {
+export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initialTab = 'activations' }: DashboardProps) {
   const { user, signOut } = useAuth();
   const { t, lang } = useLanguage();
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [loading, setLoading] = useState(true);
   const [members, setMembers] = useState<MotherLineMember[]>([]);
   const [tab, setTab] = useState<DashboardTab>(initialTab);
+  const [membersLoaded, setMembersLoaded] = useState(false);
+  const [whatsappJoined, setWhatsappJoined] = useState<boolean | null>(null);
 
   // Mother-line members (founder, mentors, leaders) get the Referrals tab.
   useEffect(() => {
     if (!user) return;
     fetchMyMotherLineMembers()
       .then(setMembers)
-      .catch(() => setMembers([]));
+      .catch(() => setMembers([]))
+      .finally(() => setMembersLoaded(true));
+    fetchOnboarding(user.id)
+      .then((row) => setWhatsappJoined(Boolean(row?.whatsapp_joined_at)))
+      .catch(() => setWhatsappJoined(null));
   }, [user]);
 
   useEffect(() => {
@@ -133,6 +142,14 @@ export default function Dashboard({ onBackHome, onBuyLlc, initialTab = 'activati
           <MyLLC onBuyLlc={onBuyLlc} />
         ) : (
         <>
+        <NextSteps
+          showWhatsapp={membersLoaded && members.length === 0 && whatsappJoined === false}
+          hasMembership={registrations.some((r) => r.payment_status === 'completed')}
+          onJoined={() => setWhatsappJoined(true)}
+          onBuyMembership={onBuyMembership}
+          onBuyLlc={onBuyLlc}
+        />
+
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
