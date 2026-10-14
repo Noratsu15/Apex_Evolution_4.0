@@ -1,4 +1,4 @@
-import { ArrowRight, Play, Check, Sparkles, Building2 } from 'lucide-react';
+import { ArrowRight, Play, Check, Sparkles, Building2, Landmark } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { SHORT_LABELS } from '@/i18n/onboarding';
@@ -87,6 +87,13 @@ export default function Hero({ onGetStarted }: HeroProps) {
             >
               <Building2 className="w-4 h-4" />
               {SHORT_LABELS[lang].llc}
+            </button>
+            <button
+              onClick={() => document.querySelector('#bank')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-amber-300 border border-amber-500/30 hover:border-amber-400 hover:bg-amber-500/10 px-5 py-2.5 rounded-full transition-all"
+            >
+              <Landmark className="w-4 h-4" />
+              {SHORT_LABELS[lang].bank}
             </button>
           </div>
 

@@ -16,8 +16,10 @@ import Dashboard from '@/components/Dashboard';
 import ReferralBanner from '@/components/ReferralBanner';
 import LLCSection from '@/components/LLCSection';
 import LLCOrderModal from '@/components/LLCOrderModal';
+import BankSection from '@/components/BankSection';
+import PlanSelectModal from '@/components/PlanSelectModal';
 import WelcomeGate from '@/components/WelcomeGate';
-import type { DashboardTab, Plan, Registration } from '@/types';
+import type { DashboardTab, LlcService, Plan, Registration } from '@/types';
 
 type View = 'landing' | 'dashboard';
 
@@ -28,7 +30,9 @@ function AppContent() {
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
   const [regModalOpen, setRegModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
-  const [llcModalOpen, setLlcModalOpen] = useState(false);
+  const [planModalOpen, setPlanModalOpen] = useState(false);
+  const [orderService, setOrderService] = useState<LlcService | null>(null);
+  const [dashboardKey, setDashboardKey] = useState(0); // remount the portal after a purchase
   const [dashboardTab, setDashboardTab] = useState<DashboardTab>('activations');
 
   // Redirect to dashboard if user is logged in and tries to access dashboard view
@@ -49,17 +53,13 @@ function AppContent() {
     }
   };
 
-  const handleBuyMembership = () => {
-    setView('landing');
-    setTimeout(() => document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' }), 150);
-  };
-
-  const handleGetLlc = () => {
-    setView('landing');
-    setLlcModalOpen(true);
-  };
+  // Purchases open as modals on top of the current view (landing or portal).
+  const handleBuyMembership = () => setPlanModalOpen(true);
+  const handleGetLlc = () => setOrderService('llc');
+  const handleGetBank = () => setOrderService('bank');
 
   const handleSelectPlan = (plan: Plan) => {
+    setPlanModalOpen(false);
     setSelectedPlan(plan);
     setRegModalOpen(true);
   };
@@ -77,6 +77,8 @@ function AppContent() {
   const handleRegComplete = (_registration: Registration) => {
     setRegModalOpen(false);
     setSelectedPlan(null);
+    setDashboardTab('activations');
+    setDashboardKey((k) => k + 1);
     setView('dashboard');
   };
 
@@ -91,9 +93,11 @@ function AppContent() {
   const page =
     view === 'dashboard' && user ? (
       <Dashboard
+        key={dashboardKey}
         onBackHome={() => setView('landing')}
         initialTab={dashboardTab}
         onBuyLlc={handleGetLlc}
+        onBuyBank={handleGetBank}
         onBuyMembership={handleBuyMembership}
       />
     ) : (
@@ -109,12 +113,20 @@ function AppContent() {
         <HowItWorks />
         <Pricing onSelectPlan={handleSelectPlan} />
         <LLCSection onGetLlc={handleGetLlc} />
+        <BankSection onGetBank={handleGetBank} />
         <Testimonials />
         <FAQ />
         <CTA onGetStarted={handleGetStarted} />
       </main>
       <Footer />
       <ReferralBanner />
+    </div>
+    );
+
+  // WelcomeGate stays mounted across view changes so it never re-opens by mistake.
+  return (
+    <>
+      {page}
 
       <AuthModal
         open={authModalOpen}
@@ -126,12 +138,16 @@ function AppContent() {
         }}
       />
 
+      <PlanSelectModal open={planModalOpen} onClose={() => setPlanModalOpen(false)} onSelect={handleSelectPlan} />
+
       <LLCOrderModal
-        open={llcModalOpen}
-        onClose={() => setLlcModalOpen(false)}
+        open={orderService !== null}
+        service={orderService ?? 'llc'}
+        onClose={() => setOrderService(null)}
         onComplete={() => {
-          setLlcModalOpen(false);
+          setOrderService(null);
           setDashboardTab('llc');
+          setDashboardKey((k) => k + 1);
           setView('dashboard');
         }}
       />
@@ -145,14 +161,8 @@ function AppContent() {
         }}
         onComplete={handleRegComplete}
       />
-    </div>
-    );
 
-  // WelcomeGate stays mounted across view changes so it never re-opens by mistake.
-  return (
-    <>
-      {page}
-      <WelcomeGate onBuyMembership={handleBuyMembership} onBuyLlc={handleGetLlc} />
+      <WelcomeGate onBuyMembership={handleBuyMembership} onBuyLlc={handleGetLlc} onBuyBank={handleGetBank} />
     </>
   );
 }

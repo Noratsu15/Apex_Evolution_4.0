@@ -364,12 +364,13 @@ function DocRow({ title, hint, docs, busy, onUpload, onRemove }: DocRowProps) {
 
 interface DocumentsProps {
   order: LlcOrder;
+  service: LlcOrder['service'];
   partners: LlcPartner[];
   docs: LlcDocument[];
   reload: () => void;
 }
 
-function ClientDocuments({ order, partners, docs, reload }: DocumentsProps) {
+function ClientDocuments({ order, service, partners, docs, reload }: DocumentsProps) {
   const { user } = useAuth();
   const { lang } = useLanguage();
   const d = getLlcStrings(lang).portal.documents;
@@ -383,12 +384,21 @@ function ClientDocuments({ order, partners, docs, reload }: DocumentsProps) {
       partners.length > 0
         ? partners.map((p) => ({ key: `passport:${p.full_name}`, type: 'passport' as LlcDocType, label: p.full_name, title: `${d.passportFor} ${p.full_name}` }))
         : [{ key: 'passport:', type: 'passport' as LlcDocType, label: '', title: d.passport }];
+    const bankOnly =
+      service === 'bank'
+        ? [
+            { key: 'articles_of_organization:', type: 'articles_of_organization' as LlcDocType, label: '', title: d.articles },
+            { key: 'operating_agreement:', type: 'operating_agreement' as LlcDocType, label: '', title: d.operatingAgreement },
+            { key: 'ein_letter:', type: 'ein_letter' as LlcDocType, label: '', title: d.einLetter },
+          ]
+        : [];
     return [
+      ...bankOnly,
       ...passportSlots,
       { key: 'proof_of_address:', type: 'proof_of_address' as LlcDocType, label: '', title: d.proofOfAddress, hint: d.proofHint },
       { key: 'selfie:', type: 'selfie' as LlcDocType, label: '', title: d.selfie, hint: d.selfieHint },
     ];
-  }, [partners, d]);
+  }, [partners, d, service]);
 
   const upload = async (slot: { key: string; type: LlcDocType; label: string }, file: File) => {
     if (!user) return;
@@ -527,6 +537,9 @@ export default function LLCOrderPanel({ order, onChanged }: { order: LlcOrder; o
     void load();
   }, [load]);
 
+  const isBank = order.service === 'bank';
+  const stageKeys: readonly StageKey[] = isBank ? (['bank'] as const) : STAGE_KEYS;
+
   const statusOf = (k: StageKey): LlcStageStatus =>
     k === 'formation' ? order.formation_status : k === 'ein' ? order.ein_status : order.bank_status;
 
@@ -554,6 +567,7 @@ export default function LLCOrderPanel({ order, onChanged }: { order: LlcOrder; o
   return (
     <div className="space-y-6">
       {/* Progress */}
+      <h3 className="text-xl font-bold text-white -mb-2">{p.services[order.service]}</h3>
       <Card title={p.progress}>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-1 text-xs text-slate-500 -mt-3 mb-5">
           <span>
@@ -575,8 +589,8 @@ export default function LLCOrderPanel({ order, onChanged }: { order: LlcOrder; o
             </span>
           )}
         </div>
-        <ol className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {STAGE_KEYS.map((k, i) => {
+        <ol className={`grid grid-cols-1 gap-4 ${isBank ? '' : 'md:grid-cols-3'}`}>
+          {stageKeys.map((k, i) => {
             const status = statusOf(k);
             const range = LLC_TIMELINE[k];
             return (
@@ -597,19 +611,21 @@ export default function LLCOrderPanel({ order, onChanged }: { order: LlcOrder; o
         </ol>
       </Card>
 
-      <IntakeForm
-        key={`${order.intake_submitted_at ?? 'new'}-${partners.length}`}
-        order={order}
-        partners={partners}
-        onSaved={() => {
-          void load();
-          onChanged();
-        }}
-      />
+      {!isBank && (
+        <IntakeForm
+          key={`${order.intake_submitted_at ?? 'new'}-${partners.length}`}
+          order={order}
+          partners={partners}
+          onSaved={() => {
+            void load();
+            onChanged();
+          }}
+        />
+      )}
 
-      {order.intake_submitted_at && (
+      {(isBank || order.intake_submitted_at) && (
         <>
-          <ClientDocuments order={order} partners={partners} docs={docs} reload={() => void load()} />
+          <ClientDocuments order={order} service={order.service} partners={partners} docs={docs} reload={() => void load()} />
           <BusinessProfile order={order} reload={onChanged} />
         </>
       )}
@@ -666,7 +682,7 @@ export default function LLCOrderPanel({ order, onChanged }: { order: LlcOrder; o
         </button>
         {letterOpen && (
           <div className="px-5 sm:px-6 pb-6">
-            <LLCLetter />
+            <LLCLetter service={order.service} />
           </div>
         )}
       </div>

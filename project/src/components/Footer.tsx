@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <img 
-                  src="https://6a9ad419d601bb7bf57cab50.imgix.net/sandbox/logo.png" 
+                  src="https://ik.imagekit.io/ugythf2a3/logo.png?updatedAt=1791496158688" 
                   alt="Logo" 
                   className="w-9 h-9 object-contain rounded-full" 
                 />

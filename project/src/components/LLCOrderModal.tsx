@@ -5,19 +5,21 @@ import { useLanguage } from '@/context/LanguageContext';
 import { supabase } from '@/lib/supabase';
 import { loadPayPalSdk, resetPayPalSdk } from '@/lib/paypal';
 import { getLlcStrings } from '@/i18n/llc';
-import { LLC_PRICE_USD, LLC_TERMS_VERSION } from '@/data/llc';
+import { LLC_TERMS_VERSION, priceFor } from '@/data/llc';
+import type { LlcService } from '@/types';
 import AuthModal from '@/components/AuthModal';
 import LLCLetter from '@/components/LLCLetter';
 
 interface LLCOrderModalProps {
   open: boolean;
+  service?: LlcService;
   onClose: () => void;
   onComplete: () => void;
 }
 
 type Step = 'auth' | 'letter' | 'payment' | 'processing' | 'success' | 'error';
 
-export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderModalProps) {
+export default function LLCOrderModal({ open, service = 'llc', onClose, onComplete }: LLCOrderModalProps) {
   const { user } = useAuth();
   const { t, lang } = useLanguage();
   const s = getLlcStrings(lang);
@@ -33,7 +35,11 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
   const buttonsRenderedRef = useRef(false);
 
   const paypalClientId = import.meta.env.VITE_PAYPAL_CLIENT_ID as string;
-  const priceReady = LLC_PRICE_USD > 0;
+  const price = priceFor(service);
+  const priceReady = price > 0;
+  const planId = service === 'bank' ? 'bank-account-opening' : 'llc-formation';
+  const planName = service === 'bank' ? 'Bank Account Opening' : 'LLC Formation';
+  const serviceLabel = service === 'bank' ? s.order.bankServiceName : s.order.serviceName;
 
   useEffect(() => {
     if (!open) return;
@@ -78,9 +84,9 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                amount: LLC_PRICE_USD,
-                planId: 'llc-formation',
-                planName: 'LLC Formation',
+                amount: price,
+                planId,
+                planName,
               }),
             });
             if (!response.ok) {
@@ -100,9 +106,9 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   orderId: data.orderID,
-                  planId: 'llc-formation',
-                  planName: 'LLC Formation',
-                  amount: LLC_PRICE_USD,
+                  planId,
+                  planName,
+                  amount: price,
                 }),
               });
               if (!captureResponse.ok) {
@@ -118,7 +124,8 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
                 .insert({
                   email: user?.email,
                   full_name: user?.user_metadata?.full_name ?? 'Unknown',
-                  amount_paid: LLC_PRICE_USD,
+                  service,
+                  amount_paid: price,
                   payment_status: 'completed',
                   paypal_order_id: data.orderID,
                   paypal_capture_id: captureId,
@@ -132,7 +139,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
                 registration_id: null,
                 paypal_order_id: data.orderID,
                 paypal_capture_id: captureId,
-                amount: LLC_PRICE_USD,
+                amount: price,
                 currency: 'USD',
                 status: 'completed',
               });
@@ -161,7 +168,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
       console.error('PayPal setup error:', err);
       setPaypalError(t.registration.initError);
     }
-  }, [step, paypalLoaded, acceptedAt, user, onComplete, t]);
+  }, [step, paypalLoaded, acceptedAt, user, onComplete, t, price, planId, planName, service]);
 
   if (!open) return null;
 
@@ -216,7 +223,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
               </div>
 
               <div className="bg-slate-950/60 border border-slate-800 rounded-2xl p-5 sm:p-6 max-h-[45vh] overflow-y-auto mb-5">
-                <LLCLetter />
+                <LLCLetter service={service} />
               </div>
 
               {!priceReady && (
@@ -259,7 +266,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
               <div className="bg-slate-950/50 border border-slate-800 rounded-2xl p-5 mb-6 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-slate-400">{s.order.service}</span>
-                  <span className="text-sm font-medium text-white">{s.order.serviceName}</span>
+                  <span className="text-sm font-medium text-white">{serviceLabel}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-slate-400">{t.registration.billingCycle}</span>
@@ -271,7 +278,7 @@ export default function LLCOrderModal({ open, onClose, onComplete }: LLCOrderMod
                 </div>
                 <div className="pt-3 border-t border-slate-800 flex items-center justify-between">
                   <span className="text-base font-semibold text-white">{s.order.total}</span>
-                  <span className="text-2xl font-bold text-white">${LLC_PRICE_USD.toFixed(2)}</span>
+                  <span className="text-2xl font-bold text-white">${price.toFixed(2)}</span>
                 </div>
               </div>
 

@@ -15,11 +15,12 @@ import type { DashboardTab, MotherLineMember, Registration } from '@/types';
 interface DashboardProps {
   onBackHome: () => void;
   onBuyLlc: () => void;
+  onBuyBank: () => void;
   onBuyMembership: () => void;
   initialTab?: DashboardTab;
 }
 
-export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initialTab = 'activations' }: DashboardProps) {
+export default function Dashboard({ onBackHome, onBuyLlc, onBuyBank, onBuyMembership, initialTab = 'activations' }: DashboardProps) {
   const { user, signOut } = useAuth();
   const { t, lang } = useLanguage();
   const [registrations, setRegistrations] = useState<Registration[]>([]);
@@ -139,7 +140,7 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
         {tab === 'referrals' && members.length > 0 ? (
           <Referrals members={members} />
         ) : tab === 'llc' ? (
-          <MyLLC onBuyLlc={onBuyLlc} />
+          <MyLLC onBuyLlc={onBuyLlc} onBuyBank={onBuyBank} />
         ) : (
         <>
         <NextSteps
@@ -148,6 +149,7 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyMembership, initi
           onJoined={() => setWhatsappJoined(true)}
           onBuyMembership={onBuyMembership}
           onBuyLlc={onBuyLlc}
+          onBuyBank={onBuyBank}
         />
 
         {/* Stats */}

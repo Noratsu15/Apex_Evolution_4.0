@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Building2, Loader2 } from 'lucide-react';
+import { Building2, Landmark, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { getLlcStrings } from '@/i18n/llc';
 import { fetchMyLlcOrders } from '@/lib/llc';
@@ -8,10 +8,11 @@ import type { LlcOrder } from '@/types';
 
 interface MyLLCProps {
   onBuyLlc: () => void;
+  onBuyBank: () => void;
   onOrdersLoaded?: (count: number) => void;
 }
 
-export default function MyLLC({ onBuyLlc, onOrdersLoaded }: MyLLCProps) {
+export default function MyLLC({ onBuyLlc, onBuyBank, onOrdersLoaded }: MyLLCProps) {
   const { lang } = useLanguage();
   const p = getLlcStrings(lang).portal;
   const [orders, setOrders] = useState<LlcOrder[]>([]);
@@ -37,11 +38,29 @@ export default function MyLLC({ onBuyLlc, onOrdersLoaded }: MyLLCProps) {
 
   return (
     <section aria-labelledby="my-llc-title">
-      <div className="mb-8">
-        <h2 id="my-llc-title" className="text-2xl font-bold text-white mb-1">
-          {p.title}
-        </h2>
-        <p className="text-slate-400">{p.subtitle}</p>
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 id="my-llc-title" className="text-2xl font-bold text-white mb-1">
+            {p.title}
+          </h2>
+          <p className="text-slate-400">{p.subtitle}</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <button
+            onClick={onBuyLlc}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all"
+          >
+            <Building2 className="w-4 h-4" />
+            {p.emptyCtaLlc}
+          </button>
+          <button
+            onClick={onBuyBank}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors"
+          >
+            <Landmark className="w-4 h-4" />
+            {p.emptyCtaBank}
+          </button>
+        </div>
       </div>
 
       {loading ? (
@@ -65,12 +84,20 @@ export default function MyLLC({ onBuyLlc, onOrdersLoaded }: MyLLCProps) {
           </div>
           <p className="text-white font-semibold">{p.emptyTitle}</p>
           <p className="text-slate-400 text-sm mt-1 mb-6">{p.emptyText}</p>
-          <button
-            onClick={onBuyLlc}
-            className="px-6 py-3 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all"
-          >
-            {p.emptyCta}
-          </button>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button
+              onClick={onBuyLlc}
+              className="px-6 py-3 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 transition-all"
+            >
+              {p.emptyCtaLlc}
+            </button>
+            <button
+              onClick={onBuyBank}
+              className="px-6 py-3 rounded-xl font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors"
+            >
+              {p.emptyCtaBank}
+            </button>
+          </div>
         </div>
       ) : (
         <div className="space-y-12">

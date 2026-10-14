@@ -1,14 +1,14 @@
 import type { LanguageCode } from './types';
 
 /** Short labels used on the main buttons; translated into every supported language. */
-export const SHORT_LABELS: Record<LanguageCode, { signUpFree: string; membership: string; llc: string; or: string }> = {
-  es: { signUpFree: 'Registrarme gratis', membership: 'Activar membresía', llc: 'Constituir LLC', or: 'o elige directamente' },
-  en: { signUpFree: 'Sign up free', membership: 'Activate membership', llc: 'Form an LLC', or: 'or go straight to' },
-  zh: { signUpFree: '免费注册', membership: '激活会员', llc: '成立 LLC', or: '或直接选择' },
-  ja: { signUpFree: '無料で登録', membership: 'メンバーシップを有効化', llc: 'LLCを設立', or: 'または直接選ぶ' },
-  it: { signUpFree: 'Registrati gratis', membership: 'Attiva la membership', llc: 'Costituisci una LLC', or: 'oppure scegli direttamente' },
-  fr: { signUpFree: "S'inscrire gratuitement", membership: "Activer l'abonnement", llc: 'Créer une LLC', or: 'ou choisissez directement' },
-  de: { signUpFree: 'Kostenlos registrieren', membership: 'Mitgliedschaft aktivieren', llc: 'LLC gründen', or: 'oder direkt wählen' },
+export const SHORT_LABELS: Record<LanguageCode, { signUpFree: string; membership: string; llc: string; bank: string; or: string }> = {
+  es: { signUpFree: 'Registrarme gratis', membership: 'Activar membresía', llc: 'Constituir LLC', bank: 'Cuenta bancaria', or: 'o elige directamente' },
+  en: { signUpFree: 'Sign up free', membership: 'Activate membership', llc: 'Form an LLC', bank: 'Bank account', or: 'or go straight to' },
+  zh: { signUpFree: '免费注册', membership: '激活会员', llc: '成立 LLC', bank: '银行账户', or: '或直接选择' },
+  ja: { signUpFree: '無料で登録', membership: 'メンバーシップを有効化', llc: 'LLCを設立', bank: '銀行口座', or: 'または直接選ぶ' },
+  it: { signUpFree: 'Registrati gratis', membership: 'Attiva la membership', llc: 'Costituisci una LLC', bank: 'Conto bancario', or: 'oppure scegli direttamente' },
+  fr: { signUpFree: "S'inscrire gratuitement", membership: "Activer l'abonnement", llc: 'Créer une LLC', bank: 'Compte bancaire', or: 'ou choisissez directement' },
+  de: { signUpFree: 'Kostenlos registrieren', membership: 'Mitgliedschaft aktivieren', llc: 'LLC gründen', bank: 'Bankkonto', or: 'oder direkt wählen' },
 };
 
 export interface OnboardingStrings {

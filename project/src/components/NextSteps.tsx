@@ -10,10 +10,11 @@ interface NextStepsProps {
   onJoined: () => void;
   onBuyMembership: () => void;
   onBuyLlc: () => void;
+  onBuyBank: () => void;
 }
 
-/** Always-visible guidance in the portal: join the group, activate a membership, or form an LLC. */
-export default function NextSteps({ showWhatsapp, hasMembership, onJoined, onBuyMembership, onBuyLlc }: NextStepsProps) {
+/** Always-visible guidance in the portal: join the group, activate a membership, form an LLC or open a bank account. */
+export default function NextSteps({ showWhatsapp, hasMembership, onJoined, onBuyMembership, onBuyLlc, onBuyBank }: NextStepsProps) {
   const { lang } = useLanguage();
   const n = getOnboardingStrings(lang).next;
   const whatsappVisible = showWhatsapp && getWhatsappGroupUrl() !== null;
@@ -27,7 +28,7 @@ export default function NextSteps({ showWhatsapp, hasMembership, onJoined, onBuy
         {!hasMembership && <p className="text-sm text-slate-400">{n.subtitle}</p>}
       </div>
       {whatsappVisible && <WhatsAppJoinCard joined={false} onJoined={onJoined} />}
-      <ServiceOptions onMembership={onBuyMembership} onLlc={onBuyLlc} showMembership={!hasMembership} />
+      <ServiceOptions onMembership={onBuyMembership} onLlc={onBuyLlc} onBank={onBuyBank} showMembership={!hasMembership} />
     </section>
   );
 }

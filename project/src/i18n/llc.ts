@@ -1,4 +1,5 @@
 import type { LanguageCode } from './types';
+import { BANK_PRICE_USD } from '@/data/llc';
 
 export interface LlcLetterSection {
   heading: string;
@@ -8,6 +9,25 @@ export interface LlcLetterSection {
 
 export interface LlcStrings {
   navLabel: string;
+  navBank: string;
+  bank: {
+    label: string;
+    title: string;
+    subtitle: string;
+    note: string;
+    price: string;
+    priceOneTime: string;
+    cta: string;
+    readLetter: string;
+    requirementsTitle: string;
+    prerequisite: string;
+    timeline: string;
+  };
+  bankLetter: {
+    title: string;
+    intro: string;
+    sections: LlcLetterSection[];
+  };
   section: {
     label: string;
     title: string;
@@ -37,6 +57,9 @@ export interface LlcStrings {
     llcTitle: string;
     llcText: string;
     llcCta: string;
+    bankTitle: string;
+    bankText: string;
+    bankCta: string;
   };
   letter: {
     title: string;
@@ -67,6 +90,7 @@ export interface LlcStrings {
     priceMissing: string;
     acceptRequired: string;
     serviceName: string;
+    bankServiceName: string;
   };
   portal: {
     tab: string;
@@ -75,6 +99,10 @@ export interface LlcStrings {
     emptyTitle: string;
     emptyText: string;
     emptyCta: string;
+    emptyCtaLlc: string;
+    emptyCtaBank: string;
+    buyAnother: string;
+    services: { llc: string; bank: string };
     orderedOn: string;
     progress: string;
     stages: { formation: string; ein: string; bank: string };
@@ -112,6 +140,9 @@ export interface LlcStrings {
       proofHint: string;
       selfie: string;
       selfieHint: string;
+      articles: string;
+      operatingAgreement: string;
+      einLetter: string;
       upload: string;
       uploading: string;
       remove: string;
@@ -150,6 +181,76 @@ export interface LlcStrings {
 
 const es: LlcStrings = {
   navLabel: 'Constituir LLC',
+  navBank: 'Cuenta bancaria',
+  bank: {
+    label: 'Cuenta bancaria internacional',
+    title: 'Abre tu cuenta bancaria internacional, 100% remoto',
+    subtitle:
+      'Una vez constituida tu LLC y obtenido tu EIN, te acompañamos en la solicitud en Relay Financial o Wise Business hasta la aprobación final, sin necesidad de viajar.',
+    note: 'Este servicio es independiente de las membresías y de la formación de la LLC.',
+    price: 'Apertura de cuenta bancaria internacional',
+    priceOneTime: 'pago único',
+    cta: 'Quiero mi cuenta bancaria',
+    readLetter: 'Leer la carta del servicio',
+    requirementsTitle: 'Requisitos para abrir tu cuenta (Módulo 2)',
+    prerequisite: 'Para iniciar necesitas tener tu LLC constituida y tu EIN asignado.',
+    timeline: 'Tiempo estimado: de 2 a 5 días hábiles, una vez listos la LLC y el EIN.',
+  },
+  bankLetter: {
+    title: 'Carta de servicio y condiciones de pago: apertura de cuenta bancaria internacional',
+    intro:
+      'Antes de realizar tu pago, te explicamos en qué consiste la apertura de tu cuenta bancaria internacional, qué necesitamos de ti y qué puedes esperar.',
+    sections: [
+      {
+        heading: '1. Qué es este servicio',
+        paragraphs: [
+          'Te acompañamos en la solicitud de la cuenta bancaria internacional de tu LLC en plataformas financieras y neobancos aliados (como Relay Financial o Wise Business), 100% remoto. Es un servicio independiente de las membresías y de la formación de la LLC.',
+        ],
+      },
+      {
+        heading: '2. Qué incluye',
+        items: [
+          'Registro en la plataforma digital elegida.',
+          'Carga de tus documentos corporativos.',
+          'Seguimiento de la revisión de cumplimiento hasta la aprobación final de la cuenta, sin necesidad de viajar.',
+          'Un portal donde subes tus documentos y ves el estado de tu solicitud.',
+        ],
+      },
+      {
+        heading: '3. Requisitos (Módulo 2)',
+        items: [
+          'Certificado de formación de la LLC (Articles of Organization) y Operating Agreement.',
+          'Carta oficial de asignación del EIN emitida por el IRS.',
+          'Pasaporte vigente del titular y foto de verificación (selfie de seguridad que solicita la plataforma).',
+          'Comprobante de domicilio: recibo de servicios o estado de cuenta reciente que coincida con los datos personales del titular.',
+          'Perfil del negocio: breve descripción de la actividad, sitio web o redes sociales activas.',
+        ],
+      },
+      {
+        heading: '4. Tiempos estimados',
+        items: ['De 2 a 5 días hábiles, una vez listos la LLC y el EIN. Es un tiempo estimado y puede variar según la revisión de cada plataforma.'],
+      },
+      {
+        heading: '5. Recomendaciones para operar y proteger tu negocio (Módulo 3)',
+        items: [
+          'Separa por completo tus finanzas personales de las de la LLC.',
+          'Guarda facturas, comprobantes y soportes de ventas.',
+          'Ten presente la renovación del Registered Agent y los reportes anuales del estado.',
+          'Opera desde una geolocalización y red estables para evitar bloqueos de seguridad.',
+        ],
+      },
+      {
+        heading: '6. Condiciones importantes',
+        items: [
+          `El costo del servicio es de USD ${BANK_PRICE_USD} (pago único).`,
+          'Para iniciar debes tener tu LLC constituida y tu EIN asignado.',
+          'La aprobación final de la cuenta la decide cada plataforma tras su propia revisión de cumplimiento.',
+          'La información y los documentos que aportes deben ser veraces y se usan únicamente para este trámite.',
+          'El pago se procesa de forma segura con PayPal, en dólares estadounidenses (USD).',
+        ],
+      },
+    ],
+  },
   section: {
     label: 'Formación de LLC en EE. UU.',
     title: 'Crea tu empresa en Estados Unidos, 100% remoto',
@@ -274,6 +375,9 @@ const es: LlcStrings = {
     llcTitle: 'Constituir mi LLC en EE. UU.',
     llcText: 'Tu empresa, tu EIN y tu cuenta bancaria internacional, 100% remoto.',
     llcCta: 'Empezar con mi LLC',
+    bankTitle: 'Abrir mi cuenta bancaria internacional',
+    bankText: 'Relay Financial o Wise Business, sin viajar. Costo: USD 680.',
+    bankCta: 'Abrir mi cuenta',
   },
   letter: {
     title: 'Carta de servicio y condiciones de pago',
@@ -369,14 +473,19 @@ const es: LlcStrings = {
     priceMissing: 'El precio del servicio aún no está configurado. Contacta con soporte.',
     acceptRequired: 'Debes aceptar la carta de servicio para continuar.',
     serviceName: 'Formación de LLC en EE. UU.',
+    bankServiceName: 'Apertura de cuenta bancaria internacional',
   },
   portal: {
-    tab: 'Mi LLC',
-    title: 'Mi LLC',
+    tab: 'LLC y cuenta bancaria',
+    title: 'LLC y cuenta bancaria',
     subtitle: 'Sigue el avance de tu empresa, completa tus datos y gestiona tus documentos.',
     emptyTitle: 'Aún no has contratado la formación de tu LLC',
     emptyText: 'Crea tu empresa en Estados Unidos, obtén tu EIN y abre tu cuenta bancaria, 100% remoto.',
     emptyCta: 'Conocer el servicio',
+    emptyCtaLlc: 'Constituir mi LLC',
+    emptyCtaBank: 'Abrir cuenta bancaria',
+    buyAnother: 'Contratar un servicio',
+    services: { llc: 'Formación de LLC', bank: 'Cuenta bancaria internacional' },
     orderedOn: 'Contratado el',
     progress: 'Avance del proceso',
     stages: { formation: 'Formación de la LLC', ein: 'Obtención del EIN', bank: 'Cuenta bancaria' },
@@ -423,6 +532,9 @@ const es: LlcStrings = {
       proofHint: 'Recibo de servicios o estado de cuenta reciente, a nombre del titular.',
       selfie: 'Selfie de verificación',
       selfieHint: 'La plataforma puede pedirla; puedes adelantarla aquí.',
+      articles: 'Certificado de formación (Articles of Organization)',
+      operatingAgreement: 'Operating Agreement',
+      einLetter: 'Carta de asignación del EIN (IRS)',
       upload: 'Subir archivo',
       uploading: 'Subiendo…',
       remove: 'Eliminar',
@@ -466,6 +578,76 @@ const es: LlcStrings = {
 
 const en: LlcStrings = {
   navLabel: 'Form an LLC',
+  navBank: 'Bank account',
+  bank: {
+    label: 'International bank account',
+    title: 'Open your international bank account, 100% remotely',
+    subtitle:
+      'Once your LLC is formed and your EIN is obtained, we guide you through the application with Relay Financial or Wise Business up to final approval, with no need to travel.',
+    note: 'This service is independent from memberships and from LLC formation.',
+    price: 'International bank account opening',
+    priceOneTime: 'one-time payment',
+    cta: 'I want my bank account',
+    readLetter: 'Read the service letter',
+    requirementsTitle: 'Requirements to open your account (Module 2)',
+    prerequisite: 'To start you need your LLC formed and your EIN assigned.',
+    timeline: 'Estimated time: 2 to 5 business days once the LLC and EIN are ready.',
+  },
+  bankLetter: {
+    title: 'Service letter and payment terms: international bank account opening',
+    intro:
+      'Before you pay, here is what the international bank account opening involves, what we need from you, and what to expect.',
+    sections: [
+      {
+        heading: '1. What this service is',
+        paragraphs: [
+          'We guide you through the application for your LLC\u2019s international bank account with allied financial platforms and neobanks (such as Relay Financial or Wise Business), 100% remotely. It is independent from memberships and from LLC formation.',
+        ],
+      },
+      {
+        heading: '2. What is included',
+        items: [
+          'Registration on the chosen digital platform.',
+          'Upload of your corporate documents.',
+          'Follow-up of the compliance review up to final account approval, with no need to travel.',
+          'A portal where you upload your documents and see the status of your application.',
+        ],
+      },
+      {
+        heading: '3. Requirements (Module 2)',
+        items: [
+          'Certificate of Formation (Articles of Organization) and Operating Agreement.',
+          'Official EIN assignment letter issued by the IRS.',
+          "Valid passport of the holder and a verification photo (the security selfie the platform requests).",
+          "Proof of address: recent utility bill or bank statement matching the holder's personal information.",
+          'Business profile: brief description of the activity, website, or active social media.',
+        ],
+      },
+      {
+        heading: '4. Estimated times',
+        items: ['2 to 5 business days once the LLC and EIN are ready. This is an estimate and may vary with each platform\u2019s review.'],
+      },
+      {
+        heading: '5. Recommendations to operate and protect your business (Module 3)',
+        items: [
+          'Fully separate your personal finances from the LLC\u2019s.',
+          'Keep invoices, receipts, and sales records.',
+          'Remember the Registered Agent renewal and the state annual reports.',
+          'Operate from a stable geolocation and network to avoid security blocks.',
+        ],
+      },
+      {
+        heading: '6. Important conditions',
+        items: [
+          `The service costs USD ${BANK_PRICE_USD} (one-time payment).`,
+          'To start you must have your LLC formed and your EIN assigned.',
+          'Final account approval is decided by each platform after its own compliance review.',
+          'The information and documents you provide must be truthful and are used only for this process.',
+          'Payment is processed securely through PayPal, in US dollars (USD).',
+        ],
+      },
+    ],
+  },
   section: {
     label: 'US LLC formation',
     title: 'Create your US company, 100% remotely',
@@ -566,6 +748,9 @@ const en: LlcStrings = {
     llcTitle: 'Form my US LLC',
     llcText: 'Your company, your EIN, and your international bank account, 100% remote.',
     llcCta: 'Start my LLC',
+    bankTitle: 'Open my international bank account',
+    bankText: 'Relay Financial or Wise Business, no travel. Cost: USD 680.',
+    bankCta: 'Open my account',
   },
   letter: {
     title: 'Service letter and payment terms',
@@ -661,14 +846,19 @@ const en: LlcStrings = {
     priceMissing: 'The service price is not configured yet. Please contact support.',
     acceptRequired: 'You must accept the service letter to continue.',
     serviceName: 'US LLC formation',
+    bankServiceName: 'International bank account opening',
   },
   portal: {
-    tab: 'My LLC',
-    title: 'My LLC',
+    tab: 'LLC & bank account',
+    title: 'LLC & bank account',
     subtitle: 'Follow your company\u2019s progress, complete your details, and manage your documents.',
     emptyTitle: 'You have not ordered an LLC formation yet',
     emptyText: 'Create your US company, get your EIN, and open your bank account, 100% remote.',
     emptyCta: 'Learn about the service',
+    emptyCtaLlc: 'Form my LLC',
+    emptyCtaBank: 'Open bank account',
+    buyAnother: 'Order a service',
+    services: { llc: 'LLC formation', bank: 'International bank account' },
     orderedOn: 'Ordered on',
     progress: 'Process progress',
     stages: { formation: 'LLC formation', ein: 'EIN', bank: 'Bank account' },
@@ -715,6 +905,9 @@ const en: LlcStrings = {
       proofHint: 'Recent utility bill or bank statement in the holder\u2019s name.',
       selfie: 'Verification selfie',
       selfieHint: 'The platform may request it; you can upload it ahead of time.',
+      articles: 'Certificate of Formation (Articles of Organization)',
+      operatingAgreement: 'Operating Agreement',
+      einLetter: 'EIN assignment letter (IRS)',
       upload: 'Upload file',
       uploading: 'Uploading…',
       remove: 'Remove',

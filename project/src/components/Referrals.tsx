@@ -12,6 +12,7 @@ import {
   Users,
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { SHORT_LABELS } from '@/i18n/onboarding';
 import { getLocalizedPlan } from '@/data/plans';
 import { buildReferralLink, fetchMyReferrals } from '@/lib/referrals';
 import type { MotherLineMember, MotherLineRole, Referral } from '@/types';
@@ -38,7 +39,7 @@ function initialsOf(name: string) {
 }
 
 export default function Referrals({ members }: ReferralsProps) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const r = t.referrals;
   const [referrals, setReferrals] = useState<Referral[]>([]);
   const [loading, setLoading] = useState(true);
@@ -334,7 +335,13 @@ export default function Referrals({ members }: ReferralsProps) {
                   <div className="flex items-center gap-4 sm:justify-end">
                     {ref.plan && (
                       <span className="text-xs text-slate-400 hidden md:inline">
-                        {ref.product === 'llc' ? 'LLC' : ref.product === 'both' ? `${plan?.name ?? ref.plan} + LLC` : plan?.name ?? ref.plan}
+                        {ref.product === 'llc'
+                          ? 'LLC'
+                          : ref.product === 'bank'
+                          ? SHORT_LABELS[lang].bank
+                          : ref.product === 'multiple'
+                          ? `${plan?.name ?? ref.plan} +`
+                          : plan?.name ?? ref.plan}
                       </span>
                     )}
                     {ref.payment_status === 'completed' && (

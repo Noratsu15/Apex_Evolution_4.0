@@ -1,15 +1,16 @@
-import { Building2, Sparkles } from 'lucide-react';
+import { Building2, Landmark, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { getLlcStrings } from '@/i18n/llc';
 
 interface ServiceOptionsProps {
   onMembership: () => void;
   onLlc: () => void;
+  onBank: () => void;
   showMembership?: boolean;
 }
 
-/** The two paid paths: activate a membership or form an LLC. Used in the welcome modal and the portal. */
-export default function ServiceOptions({ onMembership, onLlc, showMembership = true }: ServiceOptionsProps) {
+/** The three paid paths: membership, LLC formation, international bank account. */
+export default function ServiceOptions({ onMembership, onLlc, onBank, showMembership = true }: ServiceOptionsProps) {
   const { lang } = useLanguage();
   const { chooser } = getLlcStrings(lang);
 
@@ -18,10 +19,11 @@ export default function ServiceOptions({ onMembership, onLlc, showMembership = t
       ? [{ icon: Sparkles, title: chooser.membershipTitle, text: chooser.membershipText, cta: chooser.membershipCta, onClick: onMembership }]
       : []),
     { icon: Building2, title: chooser.llcTitle, text: chooser.llcText, cta: chooser.llcCta, onClick: onLlc },
+    { icon: Landmark, title: chooser.bankTitle, text: chooser.bankText, cta: chooser.bankCta, onClick: onBank },
   ];
 
   return (
-    <div className={`grid grid-cols-1 gap-4 ${options.length > 1 ? 'sm:grid-cols-2' : ''}`}>
+    <div className={`grid grid-cols-1 gap-4 ${options.length === 3 ? 'md:grid-cols-3' : 'sm:grid-cols-2'}`}>
       {options.map(({ icon: Icon, title, text, cta, onClick }) => (
         <button
           key={title}

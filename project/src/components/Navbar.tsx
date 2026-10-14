@@ -31,6 +31,7 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
     { label: t.nav.features, href: '#features' },
     { label: t.nav.pricing, href: '#pricing' },
     { label: getLlcStrings(lang).navLabel, href: '#llc' },
+    { label: getLlcStrings(lang).navBank, href: '#bank' },
     { label: t.nav.howItWorks, href: '#how-it-works' },
     { label: t.nav.faq, href: '#faq' },
   ];
@@ -54,7 +55,7 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
           {/* Logo */}
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
-                src="https://6a9ad419d601bb7bf57cab50.imgix.net/sandbox/logo.png" 
+                src="https://ik.imagekit.io/ugythf2a3/logo.png?updatedAt=1791496158688" 
                 alt="Logo" 
                 className="w-9 h-9 object-contain rounded-full" 
               />

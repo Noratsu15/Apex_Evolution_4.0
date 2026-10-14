@@ -47,7 +47,7 @@ export interface MotherLineMember {
   is_me: boolean;
 }
 
-export type ReferralProduct = 'membership' | 'llc' | 'both';
+export type ReferralProduct = 'membership' | 'llc' | 'bank' | 'multiple';
 
 export type ReferralPaymentStatus = 'completed' | 'pending' | 'failed' | 'none';
 
@@ -66,6 +66,7 @@ export interface Referral {
 export type DashboardTab = 'activations' | 'llc' | 'referrals';
 
 export type LlcState = 'wyoming' | 'florida';
+export type LlcService = 'llc' | 'bank';
 export type LlcStageStatus = 'pending' | 'in_progress' | 'completed';
 export type LlcDocType =
   | 'passport'
@@ -78,6 +79,7 @@ export type LlcDocType =
 
 export interface LlcOrder {
   id: string;
+  service: LlcService;
   user_id: string;
   email: string;
   full_name: string;

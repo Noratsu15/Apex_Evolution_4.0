@@ -1,4 +1,4 @@
-import type { LlcState } from '@/types';
+import type { LlcService, LlcState } from '@/types';
 
 /** Price of the LLC formation service in USD. Set VITE_LLC_PRICE_USD (e.g. in Netlify). */
 export const LLC_PRICE_USD = Number(import.meta.env.VITE_LLC_PRICE_USD ?? 0) || 0;
@@ -22,3 +22,10 @@ export const LLC_TOTAL_DAYS = {
   min: LLC_TIMELINE.formation.min + LLC_TIMELINE.ein.min + LLC_TIMELINE.bank.min,
   max: LLC_TIMELINE.formation.max + LLC_TIMELINE.ein.max + LLC_TIMELINE.bank.max,
 };
+
+/** International bank account opening: fixed price in USD. */
+export const BANK_PRICE_USD = 680;
+
+export function priceFor(service: LlcService): number {
+  return service === 'bank' ? BANK_PRICE_USD : LLC_PRICE_USD;
+}

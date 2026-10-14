@@ -11,13 +11,14 @@ import WhatsAppJoinCard from '@/components/WhatsAppJoinCard';
 interface WelcomeGateProps {
   onBuyMembership: () => void;
   onBuyLlc: () => void;
+  onBuyBank: () => void;
 }
 
 /**
  * Shown once to every new user who is not part of the mother line:
  * WhatsApp group link + the two paid options (membership / LLC).
  */
-export default function WelcomeGate({ onBuyMembership, onBuyLlc }: WelcomeGateProps) {
+export default function WelcomeGate({ onBuyMembership, onBuyLlc, onBuyBank }: WelcomeGateProps) {
   const { user } = useAuth();
   const { lang } = useLanguage();
   const o = getOnboardingStrings(lang);
@@ -106,6 +107,7 @@ export default function WelcomeGate({ onBuyMembership, onBuyLlc }: WelcomeGatePr
             <ServiceOptions
               onMembership={() => finish(onBuyMembership)}
               onLlc={() => finish(onBuyLlc)}
+              onBank={() => finish(onBuyBank)}
             />
           </section>
 
