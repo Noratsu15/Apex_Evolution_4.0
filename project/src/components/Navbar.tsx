@@ -4,6 +4,8 @@ import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { LANGUAGES } from '@/i18n';
 import LanguageSelector from '@/components/LanguageSelector';
+import { getLlcStrings } from '@/i18n/llc';
+import { SHORT_LABELS } from '@/i18n/onboarding';
 
 interface NavbarProps {
   onGetStarted: () => void;
@@ -28,6 +30,8 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
   const navLinks = [
     { label: t.nav.features, href: '#features' },
     { label: t.nav.pricing, href: '#pricing' },
+    { label: getLlcStrings(lang).navLabel, href: '#llc' },
+    { label: getLlcStrings(lang).navBank, href: '#bank' },
     { label: t.nav.howItWorks, href: '#how-it-works' },
     { label: t.nav.faq, href: '#faq' },
   ];
@@ -51,7 +55,7 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
           {/* Logo */}
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
-                src="https://6a9ad419d601bb7bf57cab50.imgix.net/sandbox/logo.png" 
+                src="https://ik.imagekit.io/ugythf2a3/logo.png?updatedAt=1791496158688" 
                 alt="Logo" 
                 className="w-9 h-9 object-contain rounded-full" 
               />
@@ -99,9 +103,9 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
                 </button>
                 <button
                   onClick={onGetStarted}
-                  className="text-sm font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 hover:scale-[1.03]"
+                  className="text-sm font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-[1.03]"
                 >
-                  {t.nav.getStarted}
+                  {SHORT_LABELS[lang].signUpFree}
                 </button>
               </>
             )}
@@ -160,9 +164,9 @@ export default function Navbar({ onGetStarted, onSignIn, onDashboard }: NavbarPr
                     </button>
                     <button
                       onClick={() => { setMobileOpen(false); onGetStarted(); }}
-                      className="block w-full text-center text-sm font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-cyan-400 px-5 py-3 rounded-xl"
+                      className="block w-full text-center text-sm font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 px-5 py-3 rounded-xl"
                     >
-                      {t.nav.getStarted}
+                      {SHORT_LABELS[lang].signUpFree}
                     </button>
                   </>
                 )}

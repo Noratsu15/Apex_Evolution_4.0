@@ -13,7 +13,7 @@
   }
 
   ::selection {
-    @apply bg-sky-400/30 text-white;
+    @apply bg-amber-400/30 text-white;
   }
 }
 

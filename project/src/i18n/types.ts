@@ -197,4 +197,40 @@ export interface Translations {
     signOut: string;
     locale: string;
   };
+
+  // Referrals (mother line)
+  referrals: {
+    tabActivations: string;
+    tabReferrals: string;
+    title: string;
+    subtitleAll: string;
+    subtitleOwn: string;
+    motherLine: string;
+    yourLink: string;
+    copyLink: string;
+    copied: string;
+    totalReferrals: string;
+    activated: string;
+    notActivated: string;
+    revenue: string;
+    searchPlaceholder: string;
+    allLeaders: string;
+    allStatuses: string;
+    colReferral: string;
+    colLeader: string;
+    colPlan: string;
+    colStatus: string;
+    colDate: string;
+    statusNone: string;
+    noReferrals: string;
+    noReferralsHint: string;
+    noResults: string;
+    loadError: string;
+    retry: string;
+    roleFounder: string;
+    roleMentor: string;
+    roleLeader: string;
+    invitedBy: string;
+    dismiss: string;
+  };
 }

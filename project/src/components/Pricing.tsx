@@ -15,7 +15,7 @@ export default function Pricing({ onSelectPlan }: PricingProps) {
     <section id="pricing" className="relative py-24 bg-slate-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-sm font-semibold text-sky-400 uppercase tracking-wider">{t.pricing.label}</span>
+          <span className="text-sm font-semibold text-amber-400 uppercase tracking-wider">{t.pricing.label}</span>
           <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
             {t.pricing.title}
           </h2>
@@ -30,13 +30,13 @@ export default function Pricing({ onSelectPlan }: PricingProps) {
               key={plan.id}
               className={`relative rounded-3xl p-8 transition-all hover:-translate-y-1 ${
                 plan.highlight
-                  ? 'bg-gradient-to-b from-sky-500/10 to-slate-900 border-2 border-sky-400/50 shadow-2xl shadow-sky-500/20'
+                  ? 'bg-gradient-to-b from-amber-500/10 to-slate-900 border-2 border-amber-400/50 shadow-2xl shadow-amber-500/20'
                   : 'bg-slate-950/50 border border-slate-800 hover:border-slate-700'
               }`}
             >
               {plan.highlight && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <div className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 text-sm font-bold shadow-lg">
+                  <div className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 text-sm font-bold shadow-lg">
                     <Star className="w-3.5 h-3.5 fill-current" />
                     {t.pricing.mostPopular}
                   </div>
@@ -57,9 +57,9 @@ export default function Pricing({ onSelectPlan }: PricingProps) {
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
-                      plan.highlight ? 'bg-sky-400/20' : 'bg-slate-800'
+                      plan.highlight ? 'bg-amber-400/20' : 'bg-slate-800'
                     }`}>
-                      <Check className={`w-3 h-3 ${plan.highlight ? 'text-sky-400' : 'text-slate-400'}`} />
+                      <Check className={`w-3 h-3 ${plan.highlight ? 'text-amber-400' : 'text-slate-400'}`} />
                     </div>
                     <span className="text-sm text-slate-300">{feature}</span>
                   </li>
@@ -70,7 +70,7 @@ export default function Pricing({ onSelectPlan }: PricingProps) {
                 onClick={() => onSelectPlan(plan)}
                 className={`w-full py-3.5 rounded-xl font-semibold transition-all ${
                   plan.highlight
-                    ? 'bg-gradient-to-r from-sky-400 to-cyan-400 text-slate-950 hover:from-sky-300 hover:to-cyan-300 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.02]'
+                    ? 'bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 hover:from-amber-300 hover:to-yellow-300 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.02]'
                     : 'bg-slate-800 text-white hover:bg-slate-700 border border-slate-700'
                 }`}
               >

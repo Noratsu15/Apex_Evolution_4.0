@@ -13,7 +13,13 @@ import Footer from '@/components/Footer';
 import AuthModal from '@/components/AuthModal';
 import RegistrationModal from '@/components/RegistrationModal';
 import Dashboard from '@/components/Dashboard';
-import type { Plan, Registration } from '@/types';
+import ReferralBanner from '@/components/ReferralBanner';
+import LLCSection from '@/components/LLCSection';
+import LLCOrderModal from '@/components/LLCOrderModal';
+import BankSection from '@/components/BankSection';
+import PlanSelectModal from '@/components/PlanSelectModal';
+import WelcomeGate from '@/components/WelcomeGate';
+import type { DashboardTab, LlcService, Plan, Registration } from '@/types';
 
 type View = 'landing' | 'dashboard';
 
@@ -24,6 +30,10 @@ function AppContent() {
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
   const [regModalOpen, setRegModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+  const [planModalOpen, setPlanModalOpen] = useState(false);
+  const [orderService, setOrderService] = useState<LlcService | null>(null);
+  const [dashboardKey, setDashboardKey] = useState(0); // remount the portal after a purchase
+  const [dashboardTab, setDashboardTab] = useState<DashboardTab>('activations');
 
   // Redirect to dashboard if user is logged in and tries to access dashboard view
   useEffect(() => {
@@ -32,16 +42,24 @@ function AppContent() {
     }
   }, [view, user, loading]);
 
+  // Sign-up is free: visitors create an account, then the welcome modal guides them.
   const handleGetStarted = () => {
     if (user) {
+      setDashboardTab('activations');
       setView('dashboard');
     } else {
-      setSelectedPlan(null);
-      setRegModalOpen(true);
+      setAuthMode('signup');
+      setAuthModalOpen(true);
     }
   };
 
+  // Purchases open as modals on top of the current view (landing or portal).
+  const handleBuyMembership = () => setPlanModalOpen(true);
+  const handleGetLlc = () => setOrderService('llc');
+  const handleGetBank = () => setOrderService('bank');
+
   const handleSelectPlan = (plan: Plan) => {
+    setPlanModalOpen(false);
     setSelectedPlan(plan);
     setRegModalOpen(true);
   };
@@ -52,28 +70,37 @@ function AppContent() {
   };
 
   const handleDashboard = () => {
+    setDashboardTab('activations');
     setView('dashboard');
   };
 
   const handleRegComplete = (_registration: Registration) => {
     setRegModalOpen(false);
     setSelectedPlan(null);
+    setDashboardTab('activations');
+    setDashboardKey((k) => k + 1);
     setView('dashboard');
   };
 
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-sky-400 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
-  if (view === 'dashboard' && user) {
-    return <Dashboard onBackHome={() => setView('landing')} />;
-  }
-
-  return (
+  const page =
+    view === 'dashboard' && user ? (
+      <Dashboard
+        key={dashboardKey}
+        onBackHome={() => setView('landing')}
+        initialTab={dashboardTab}
+        onBuyLlc={handleGetLlc}
+        onBuyBank={handleGetBank}
+        onBuyMembership={handleBuyMembership}
+      />
+    ) : (
     <div className="min-h-screen bg-slate-950">
       <Navbar
         onGetStarted={handleGetStarted}
@@ -85,11 +112,21 @@ function AppContent() {
         <Features />
         <HowItWorks />
         <Pricing onSelectPlan={handleSelectPlan} />
+        <LLCSection onGetLlc={handleGetLlc} />
+        <BankSection onGetBank={handleGetBank} />
         <Testimonials />
         <FAQ />
         <CTA onGetStarted={handleGetStarted} />
       </main>
       <Footer />
+      <ReferralBanner />
+    </div>
+    );
+
+  // WelcomeGate stays mounted across view changes so it never re-opens by mistake.
+  return (
+    <>
+      {page}
 
       <AuthModal
         open={authModalOpen}
@@ -97,6 +134,20 @@ function AppContent() {
         onClose={() => setAuthModalOpen(false)}
         onSuccess={() => {
           setAuthModalOpen(false);
+          setView('dashboard');
+        }}
+      />
+
+      <PlanSelectModal open={planModalOpen} onClose={() => setPlanModalOpen(false)} onSelect={handleSelectPlan} />
+
+      <LLCOrderModal
+        open={orderService !== null}
+        service={orderService ?? 'llc'}
+        onClose={() => setOrderService(null)}
+        onComplete={() => {
+          setOrderService(null);
+          setDashboardTab('llc');
+          setDashboardKey((k) => k + 1);
           setView('dashboard');
         }}
       />
@@ -110,7 +161,9 @@ function AppContent() {
         }}
         onComplete={handleRegComplete}
       />
-    </div>
+
+      <WelcomeGate onBuyMembership={handleBuyMembership} onBuyLlc={handleGetLlc} onBuyBank={handleGetBank} />
+    </>
   );
 }
 
