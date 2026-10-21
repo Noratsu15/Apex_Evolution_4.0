@@ -116,6 +116,27 @@ const zh: Translations = {
       },
     },
   },
+  testimonials: {
+    label: '用户评价',
+    title: '受到全球团队的喜爱',
+    items: [
+      {
+        name: 'Sarah Chen',
+        role: 'TechFlow首席技术官',
+        content: 'Nexus改变了我们的部署流程。过去需要数周的工作现在只需几分钟。仅分析仪表板就带来了十倍的订阅价值。',
+      },
+      {
+        name: 'Marcus Rodriguez',
+        role: 'DevHub创始人',
+        content: '易用性无与伦比。我们的团队在一个下午就上手了。PayPal结账对我们的客户来说也非常流畅。',
+      },
+      {
+        name: 'Aisha Patel',
+        role: 'CloudNine首席工程师',
+        content: '我尝试过所有平台。Nexus是唯一一个将强大与简单结合的平台。全球CDN速度惊人。',
+      },
+    ],
+  },
   faq: {
     label: '常见问题',
     title: '常见问题解答',

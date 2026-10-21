@@ -86,7 +86,7 @@ exports.handler = async (event: { httpMethod: string; body: string }) => {
         intent: 'CAPTURE',
         purchase_units: [
           {
-            description: `Nexus ${planName || planId || 'Subscription'}`,
+            description: `Apex Evolution 4.0 ${planName || planId || 'Subscription'}`,
             amount: {
               currency_code: 'USD',
               value: amount.toFixed(2),
@@ -94,7 +94,7 @@ exports.handler = async (event: { httpMethod: string; body: string }) => {
           },
         ],
         application_context: {
-          brand_name: 'Nexus',
+          brand_name: 'Apex Evolution 4.0',
           user_action: 'PAY_NOW',
           shipping_preference: 'NO_SHIPPING',
         },

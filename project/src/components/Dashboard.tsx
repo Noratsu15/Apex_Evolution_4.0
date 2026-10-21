@@ -8,6 +8,7 @@ import { fetchMyMotherLineMembers } from '@/lib/referrals';
 import Referrals from '@/components/Referrals';
 import MyLLC from '@/components/MyLLC';
 import NextSteps from '@/components/NextSteps';
+import SystemAccessCard from '@/components/SystemAccessCard';
 import { fetchOnboarding } from '@/lib/onboarding';
 import { getLlcStrings } from '@/i18n/llc';
 import type { DashboardTab, MotherLineMember, Registration } from '@/types';
@@ -143,6 +144,11 @@ export default function Dashboard({ onBackHome, onBuyLlc, onBuyBank, onBuyMember
           <MyLLC onBuyLlc={onBuyLlc} onBuyBank={onBuyBank} />
         ) : (
         <>
+        <SystemAccessCard
+          hasMembership={registrations.some((r) => r.payment_status === 'completed')}
+          onBuyMembership={onBuyMembership}
+        />
+
         <NextSteps
           showWhatsapp={membersLoaded && members.length === 0 && whatsappJoined === false}
           hasMembership={registrations.some((r) => r.payment_status === 'completed')}

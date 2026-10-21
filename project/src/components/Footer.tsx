@@ -18,12 +18,14 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <img 
-                  src="https://ik.imagekit.io/ugythf2a3/logo.png?updatedAt=1791496158688" 
-                  alt="Logo" 
-                  className="w-9 h-9 object-contain rounded-full" 
-                />
-              <span className="text-xl font-bold text-white">Apex Evolution 4.0</span>
+              <img
+                src="https://ik.imagekit.io/ugythf2a3/logo.png?updatedAt=1791496158688"
+                alt="Logo"
+                className="w-9 h-9 object-contain rounded-full"
+              />
+              <span className="text-xl font-bold text-white">
+                Apex Evolution 4.0
+              </span>
             </div>
             <p className="text-sm text-slate-400 max-w-xs mb-6">
               {t.footer.description}
@@ -45,11 +47,16 @@ export default function Footer() {
           {/* Link columns */}
           {sections.map((section) => (
             <div key={section.title}>
-              <h4 className="text-sm font-semibold text-white mb-4">{section.title}</h4>
+              <h4 className="text-sm font-semibold text-white mb-4">
+                {section.title}
+              </h4>
               <ul className="space-y-3">
                 {section.links.map((link, i) => (
                   <li key={i}>
-                    <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">
+                    <a
+                      href="#"
+                      className="text-sm text-slate-400 hover:text-white transition-colors"
+                    >
                       {link}
                     </a>
                   </li>
@@ -61,7 +68,8 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-slate-500">
-            &copy; {new Date().getFullYear()} Nexus. {t.footer.rights}
+            &copy; {new Date().getFullYear()} Apex Evolution 4.0.{" "}
+            {t.footer.rights}
           </p>
           <div className="flex items-center gap-2 text-sm text-slate-500">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />

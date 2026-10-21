@@ -134,6 +134,30 @@ const es: Translations = {
       },
     },
   },
+  testimonials: {
+    label: 'Testimonios',
+    title: 'Amado por miembros de todo el mundo hispano',
+    items: [
+      {
+        name: 'Mariana Rondón',
+        role: 'Franquiciada, Venezuela',
+        content:
+          'Apex Evolution 4.0 transformó mi experiencia en turismo en un negocio digital. Mi sub-web prospecciona sola y las comisiones del 30% se acreditan solas. Lo que soñé por años lo construí en meses.',
+      },
+      {
+        name: 'Carlos Méndez',
+        role: 'Miembro Élite, Colombia',
+        content:
+          'La bienvenida por WhatsApp con mi nicho me sorprendió: la IA de la casa me acompañó desde el minuto uno. La mentoría con mi líder ordenó mi empresa, mi agenda y mi equipo.',
+      },
+      {
+        name: 'Rosa Elena Fuentes',
+        role: 'Fundadora Regional, México',
+        content:
+          'He probado muchos programas. Apex es el único que combina propósito con rentabilidad medible. Los audiolibros de Luz me dieron la fe y el mapa para liderar mi propio equipo.',
+      },
+    ],
+  },
   faq: {
     label: 'Preguntas Frecuentes',
     title: 'Preguntas frecuentes',

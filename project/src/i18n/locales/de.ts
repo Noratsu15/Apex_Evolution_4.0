@@ -134,6 +134,30 @@ const de: Translations = {
       },
     },
   },
+  testimonials: {
+    label: 'Referenzen',
+    title: 'Von Teams weltweit geliebt',
+    items: [
+      {
+        name: 'Sarah Chen',
+        role: 'CTO, TechFlow',
+        content:
+          'Nexus hat unsere Deployment-Pipeline transformiert. Was früher Wochen dauerte, dauert jetzt Minuten. Das Analytics-Dashboard allein hat das Zehnfache des Abonnements eingebracht.',
+      },
+      {
+        name: 'Marcus Rodriguez',
+        role: 'Gründer, DevHub',
+        content:
+          'Die Benutzerfreundlichkeit ist unübertroffen. Unser Team war an einem einzigen Nachmittag einsatzbereit. Der PayPal-Checkout war auch für unsere Kunden nahtlos.',
+      },
+      {
+        name: 'Aisha Patel',
+        role: 'Lead Engineer, CloudNine',
+        content:
+          'Ich habe jede Plattform ausprobiert. Nexus ist die einzige, die Leistung mit Einfachheit kombiniert. Das globale CDN ist unglaublich schnell.',
+      },
+    ],
+  },
   faq: {
     label: 'FAQ',
     title: 'Häufig gestellte Fragen',
