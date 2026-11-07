@@ -19,6 +19,7 @@ import LLCOrderModal from '@/components/LLCOrderModal';
 import BankSection from '@/components/BankSection';
 import PlanSelectModal from '@/components/PlanSelectModal';
 import WelcomeGate from '@/components/WelcomeGate';
+import ResetPasswordModal from '@/components/ResetPasswordModal';
 import type { DashboardTab, LlcService, Plan, Registration } from '@/types';
 
 type View = 'landing' | 'dashboard';
@@ -163,6 +164,13 @@ function AppContent() {
       />
 
       <WelcomeGate onBuyMembership={handleBuyMembership} onBuyLlc={handleGetLlc} onBuyBank={handleGetBank} />
+
+      <ResetPasswordModal
+        onDone={() => {
+          setDashboardTab('activations');
+          setView('dashboard');
+        }}
+      />
     </>
   );
 }
